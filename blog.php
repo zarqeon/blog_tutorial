@@ -1,6 +1,10 @@
 <?php
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
+
+	if (isset($_POST [$textarea])) {
+    echo '<input type="submit" name="Közzétesz" value="Közzétesz">';
+	}	
 ?>
 
 <html>
@@ -14,8 +18,6 @@
 </textarea>
 <br />
 <input type="submit" name="Előnézet"value="Előnézet">
-<br />
-<input type="submit" name="Közzétesz" value="Közzétesz">
 </form>
 </body>
 </html>
