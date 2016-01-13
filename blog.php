@@ -2,7 +2,7 @@
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
 	echo $_POST ["tags"];
-	$tags = ($POST["tags"]);
+	$tags = ($_POST["tags"]);
 	
 	if (validate($textarea) && validate($tags)){
 		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
@@ -10,13 +10,14 @@
 
 	function validate($variable)
 	{
-		if(empty($variable))
+		if(!empty($variable))
 		{
 			return true;
 		}
 
-		return $false;
+		return false;
 	}
+
 ?>
 
 <html>
