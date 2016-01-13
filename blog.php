@@ -4,8 +4,18 @@
 	echo $_POST ["tags"];
 	$tags = ($POST["tags"]);
 	
-	if (!empty($textarea)){
-	echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
+	if (validate($textarea) && validate($tags)){
+		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
+	}
+
+	function validate($variable)
+	{
+		if(empty($variable))
+		{
+			return true;
+		}
+
+		return $false;
 	}
 ?>
 
