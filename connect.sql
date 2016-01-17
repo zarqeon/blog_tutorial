@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `connect` (
   `tag_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`post_id`)
+  `post_id` int(11) NOT NULL,
+  `primary_key` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`primary_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
