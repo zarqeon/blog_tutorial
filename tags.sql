@@ -26,9 +26,9 @@ SET time_zone = "+00:00";
 -- Tábla szerkezet ehhez a táblához `tags`
 --
 
-CREATE TABLE IF NOT EXISTS `tags` (
+CREATE TABLE IF NOT EXISTS `tag` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Tags` tinytext COLLATE utf8_hungarian_ci NOT NULL,
+  `tag` tinytext COLLATE utf8_hungarian_ci NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
 
