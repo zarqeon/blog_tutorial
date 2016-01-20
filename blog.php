@@ -4,6 +4,8 @@
 	echo $_POST ["tags"];
 	$tags = ($_POST["tags"]);
 	
+	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
+	
 	if (validate($textarea) && validate($tags)){
 		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
 	}
