@@ -6,14 +6,11 @@
 	
 	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
 	
-	mysql_select_db("blog", $connect);
-	
-	$sql = "INSERT INTO post (post) VALUES ('$textarea')";
-	
-	mysql_query($sql, $connect);
-	
 	if (validate($textarea) && validate($tags)){
-		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
+		echo '<form action="blog.php" method="post">
+			<input type="submit" name="Közzétesz" value="Közzétesz">
+			<input type="hidden" name="hidden value="hidden">
+			</form>';		
 	}
 
 	function validate($variable)
