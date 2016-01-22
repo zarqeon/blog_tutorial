@@ -19,8 +19,14 @@
 	
 	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
 	
+	$statement = $connect->prepare("INSERT INTO post(post)
+    VALUES(?)");
+
+	$statement->execute(array("$textarea"));
+	
 	}
 
+	
 ?>
 
 <html>
