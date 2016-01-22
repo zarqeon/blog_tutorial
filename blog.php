@@ -3,15 +3,6 @@
 	$textarea = ($_POST["textarea"]);
 	echo $_POST ["tags"];
 	$tags = ($_POST["tags"]);
-	
-	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
-	
-	if (validate($textarea) && validate($tags)){
-		echo '<form action="blog.php" method="post">
-			<input type="submit" name="Közzétesz" value="Közzétesz">
-			<input type="hidden" name="hidden value="hidden">
-			</form>';		
-	}
 
 	function validate($variable)
 	{
@@ -24,7 +15,12 @@
 	}
 
 	
+	if (isset($_POST['Közzétesz'])) {
 	
+	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
+	
+	}
+
 ?>
 
 <html>
@@ -37,9 +33,15 @@
 <?php echo $textarea;?>
 </textarea>
 <br />
-<input type="text" id="tags" name="tags">
+<input type="text" id="tags" name="tags" value = "<?php echo $tags ?>">
 <br />
 <input type="submit" name="Előnézet"value="Előnézet">
+<br />
+<?php
+	if (validate($textarea) && validate($tags)){
+		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
+	}
+?>
 </form>
 </body>
 </html>
