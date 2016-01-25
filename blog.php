@@ -14,20 +14,22 @@
 		return false;
 	}
 
-	function validate_button ()
+	function validate_button ($variable)
 	{
-		if (validate($textarea) && validate($tags)){
-		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
-	}	
+		if (validate($textarea) && validate($tags))
+		{
+			echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
+		}	
 	}
 	
 	
-	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) {
+	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
+	{
 	
-	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
+		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
 
-	$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
-	$statement->execute(array($textarea));
+		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
+		$statement->execute(array($textarea));
 	}
 
 	
@@ -50,7 +52,7 @@
 <input type="submit" name="Előnézet"value="Előnézet">
 <br />
 <?php
-	validate_button ();
+	validate_button($textarea && $tags);
 ?>
 </form>
 </body>
