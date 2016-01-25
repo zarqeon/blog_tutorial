@@ -30,9 +30,9 @@
 
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($textarea));
+		
+		echo $connect->lastInsertId();
 	}
-
-	
 	
 	
 ?>
