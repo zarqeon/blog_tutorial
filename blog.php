@@ -15,17 +15,18 @@
 	}
 
 	
-	if (isset($_POST['Közzétesz'])) {
+	
+	
+	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) {
 	
 	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
-	
-	$statement = $connect->prepare("INSERT INTO post(post)
-    VALUES(?)");
 
+	$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 	$statement->execute(array("$textarea"));
-	
 	}
 
+	
+	
 	
 ?>
 
@@ -45,7 +46,7 @@
 <br />
 <?php
 	if (validate($textarea) && validate($tags)){
-		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
+	echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
 	}
 ?>
 </form>
