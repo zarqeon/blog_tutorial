@@ -14,7 +14,7 @@
 		return false;
 	}
 
-	function validate_button ($variable)
+	function validate_button ($textarea, $tags)
 	{
 		if (validate($textarea) && validate($tags))
 		{
@@ -52,7 +52,7 @@
 <input type="submit" name="Előnézet"value="Előnézet">
 <br />
 <?php
-	validate_button($textarea && $tags);
+	validate_button($textarea, $tags);
 ?>
 </form>
 </body>
