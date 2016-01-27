@@ -24,16 +24,13 @@
 	
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
-	{
-	
+	{	
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
-
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($textarea));
-		
 		echo $connect->lastInsertId();
 	}
-	
+
 	
 ?>
 
@@ -44,7 +41,7 @@
 <body>
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
-<?php echo $textarea;?>
+<?php echo $textarea; echo $_GET["r"]?>
 </textarea>
 <br />
 <input type="text" id="tags" name="tags" value = "<?php echo $tags ?>">
@@ -52,7 +49,7 @@
 <input type="submit" name="Előnézet"value="Előnézet">
 <br />
 <?php
-	validate_button($textarea, $tags);
+	validate_button($textarea, $tags); 
 ?>
 </form>
 </body>
