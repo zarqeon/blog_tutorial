@@ -7,7 +7,7 @@ $result = $query->fetchAll();
 
 foreach($result as $r) {
     echo $r['post'];
-    echo '<a href="blog.php?r=id">', $r['id'], '<br />', '</a>';
+    echo '<a href="blog.php?r='.$r['id'].'>', $r['id'], '<br />', '</a>';
 }
 
 
