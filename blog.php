@@ -3,6 +3,9 @@
 	$textarea = ($_POST["textarea"]);
 	echo $_POST ["tags"];
 	$tags = ($_POST["tags"]);
+	$id_post = ($_GET["r"]);
+	
+	echo $id_post;
 
 	function validate($variable)
 	{
@@ -22,15 +25,26 @@
 		}	
 	}
 	
+	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
+
+	$edit_post=$connect->prepare("SELECT post FROM post WHERE id='$id_post'");
+	$data=array($id_post);
+	$edit_post->execute($data);
+	$result=$edit_post->fetchColumn();
+	
+
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 	{	
-		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($textarea));
 		echo $connect->lastInsertId();
 	}
 
+
+	
+	
+	
 	
 ?>
 
@@ -41,7 +55,7 @@
 <body>
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
-<?php echo $textarea; echo $_GET["r"]?>
+<?php echo $textarea; echo $result?>
 </textarea>
 <br />
 <input type="text" id="tags" name="tags" value = "<?php echo $tags ?>">
