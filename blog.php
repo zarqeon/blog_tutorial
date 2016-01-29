@@ -27,24 +27,26 @@
 	
 	$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
 
+	
+	
+	if(empty($_POST) && !empty($id_post))
+	{
 	$edit_post=$connect->prepare("SELECT post FROM post WHERE id='$id_post'");
 	$data=array($id_post);
 	$edit_post->execute($data);
 	$result=$edit_post->fetchColumn();
+	}
 	
-
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 	{	
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($textarea));
 		echo $connect->lastInsertId();
-	}
-
-
+	}	
 	
-	
-	
+	$implode = array($textarea, $result);
+	$repost = implode (' ',$implode);
 	
 ?>
 
@@ -55,7 +57,7 @@
 <body>
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
-<?php echo $textarea; echo $result?>
+<?php echo $repost?>
 </textarea>
 <br />
 <input type="text" id="tags" name="tags" value = "<?php echo $tags ?>">
