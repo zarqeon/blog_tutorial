@@ -29,13 +29,21 @@
 
 	
 	
-	if(empty($_POST) && !empty($id_post))
+	if(!empty($textarea))
 	{
-	$edit_post=$connect->prepare("SELECT post FROM post WHERE id='$id_post'");
-	$data=array($id_post);
-	$edit_post->execute($data);
-	$result=$edit_post->fetchColumn();
+		
+		$repost=$textarea;
+		
+	}	else if(!empty($id_post) && empty($textarea)) {
+		$edit_post=$connect->prepare("SELECT post FROM post WHERE id=?");
+		$data=array($id_post);
+		$edit_post->execute($data);
+		$result=$edit_post->fetchColumn();
+		$repost=$result;
+		
 	}
+
+	
 	
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
@@ -44,9 +52,6 @@
 		$statement->execute(array($textarea));
 		echo $connect->lastInsertId();
 	}	
-	
-	$implode = array($textarea, $result);
-	$repost = implode (' ',$implode);
 	
 ?>
 
