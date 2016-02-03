@@ -6,7 +6,7 @@
 	$id_post = ($_GET["r"]);
 	
 	echo $id_post;
-
+	
 	function validate($variable)
 	{
 		if(!empty($variable))
@@ -34,7 +34,7 @@
 		
 		$repost=$textarea;
 		
-	}	else if(!empty($id_post) && empty($textarea)) {
+	}	else if(!empty($id_post)) {
 		$edit_post=$connect->prepare("SELECT post FROM post WHERE id=?");
 		$data=array($id_post);
 		$edit_post->execute($data);
@@ -44,10 +44,16 @@
 	}
 
 	
-	
+	echo "<input type='hidden' name='id_post' value='$id_post'>";
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 	{	
+		if(!empty($id_post)){
+		echo "<input type='hidden' name='id_post' value='r'>";
+		$stmnt = $connect->prepare("UPDATE post SET post = '$textarea' WHERE id='$id_post'");
+		$stmnt->execute(array($textarea));
+		}
+		
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($textarea));
 		echo $connect->lastInsertId();
