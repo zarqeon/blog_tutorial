@@ -7,6 +7,9 @@
 	
 	echo $id_post;
 	
+	var_dump($_GET);
+	
+	
 	function validate($variable)
 	{
 		if(!empty($variable))
@@ -43,13 +46,22 @@
 		
 	}
 
+
 	
-	echo "<input type='hidden' name='id_post' value='$id_post'>";
+	function hidden_input ($id_post)
+	{
+		if (!empty($id_post))
+			{
+				echo "<input type='hidden' name='id_post' value='$id_post'>";
+			}
+	}
+	
+
+
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 	{	
 		if(!empty($id_post)){
-		echo "<input type='hidden' name='id_post' value='r'>";
 		$stmnt = $connect->prepare("UPDATE post SET post = '$textarea' WHERE id='$id_post'");
 		$stmnt->execute(array($textarea));
 		}
@@ -77,7 +89,9 @@
 <br />
 <?php
 	validate_button($textarea, $tags); 
+	hidden_input($id_post);
 ?>
+
 </form>
 </body>
 </html>
