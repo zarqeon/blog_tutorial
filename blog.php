@@ -3,11 +3,10 @@
 	$textarea = ($_POST["textarea"]);
 	echo $_POST ["tags"];
 	$tags = ($_POST["tags"]);
-	$id_post = ($_REQUEST['r']);
+	$id_post = ($_REQUEST['id']);
+
 	
-	$id_repost = ($_POST['id_post']);
-	
-	var_dump($id_repost);
+	var_dump($id_post);
 	
 	
 	function validate($variable)
@@ -52,7 +51,7 @@
 	{
 		if (!empty ($id_post))
 			{
-				echo "<input type='hidden' name='id_post' value='$id_post'>";
+				echo "<input type='hidden' name='id' value='$id_post'>";
 			}
 	}
 	
@@ -61,14 +60,16 @@
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 	{	
-		if(!empty($id_repost)){
-		$stmnt = $connect->prepare("UPDATE post SET post = '$textarea' WHERE id='$id_repost'");
+		if(!empty($id_post)){
+		$stmnt = $connect->prepare("UPDATE post SET post = '$textarea' WHERE id='$id_post'");
 		$stmnt->execute(array($textarea));
 		}
 		
-		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
-		$statement->execute(array($textarea));
-		echo $connect->lastInsertId();
+		else{
+			$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
+			$statement->execute(array($textarea));
+			echo $connect->lastInsertId();
+		}
 	}	
 	
 ?>
