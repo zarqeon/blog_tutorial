@@ -3,11 +3,11 @@
 	$textarea = ($_POST["textarea"]);
 	echo $_POST ["tags"];
 	$tags = ($_POST["tags"]);
-	$id_post = ($_GET["r"]);
+	$id_post = ($_REQUEST['r']);
 	
-	echo $id_post;
+	$id_repost = ($_POST['id_post']);
 	
-	var_dump($_GET);
+	var_dump($id_repost);
 	
 	
 	function validate($variable)
@@ -22,7 +22,7 @@
 
 	function validate_button ($textarea, $tags)
 	{
-		if (validate($textarea) && validate($tags))
+		if(validate($textarea) && validate($tags))
 		{
 			echo '<input type="submit" name="Közzétesz" value="Közzétesz">';		
 		}	
@@ -50,7 +50,7 @@
 	
 	function hidden_input ($id_post)
 	{
-		if (!empty($id_post))
+		if (!empty ($id_post))
 			{
 				echo "<input type='hidden' name='id_post' value='$id_post'>";
 			}
@@ -61,8 +61,8 @@
 	
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 	{	
-		if(!empty($id_post)){
-		$stmnt = $connect->prepare("UPDATE post SET post = '$textarea' WHERE id='$id_post'");
+		if(!empty($id_repost)){
+		$stmnt = $connect->prepare("UPDATE post SET post = '$textarea' WHERE id='$id_repost'");
 		$stmnt->execute(array($textarea));
 		}
 		
