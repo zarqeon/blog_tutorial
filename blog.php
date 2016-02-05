@@ -4,9 +4,6 @@
 	echo $_POST ["tags"];
 	$tags = ($_POST["tags"]);
 	$id_post = ($_REQUEST['id']);
-
-	
-	var_dump($id_post);
 	
 	
 	function validate($variable)
@@ -66,11 +63,22 @@
 		}
 		
 		else{
+			
+			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
+			$statement->execute(array($tags));
+			
 			$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 			$statement->execute(array($textarea));
 			echo $connect->lastInsertId();
 		}
 	}	
+	
+	$exploded_tags = explode(",", $tags);
+	
+	foreach($exploded_tags as $single_tag) {
+		
+		
+	}
 	
 ?>
 
