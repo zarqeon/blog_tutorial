@@ -58,8 +58,8 @@
 	if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 	{	
 		if(!empty($id_post)){
-		$stmnt = $connect->prepare("UPDATE post SET post = '$textarea' WHERE id='$id_post'");
-		$stmnt->execute(array($textarea));
+		$stmnt = $connect->prepare("UPDATE post SET post =? WHERE id=?");
+		$stmnt->execute(array($textarea, $id_post));
 		}
 		
 		else{
