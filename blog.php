@@ -1,4 +1,9 @@
 <?php
+
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
 	echo $_POST ["tags"];
@@ -74,11 +79,10 @@
 	
 	
 	
-	
-	function processTags (){
+	function processTags ($connect, $tags){
 		
-		$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
-		$statement->execute(array($tags));
+		//$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
+		//$statement->execute(array($tags));
 		
 		$exploded_tags = explode(",", $tags);
 		foreach($exploded_tags as $single_tag){
@@ -87,11 +91,15 @@
 		
 		$query = $connect->query("SELECT ID FROM tag WHERE tag IN ($tags)");
 		
-		$result = $query->fetchAll();
+		$result = $query->fetchAll($tags);
 		
 	}
 
-	
+	if(isset($_POST['Előnézet'])){
+		
+		processTags($connect, $tags);
+
+	}
 
 	
 ?>
