@@ -89,9 +89,9 @@
 
 		}
 		
-		$query = $connect->query("SELECT ID FROM tag WHERE tag IN ($tags)");
+		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN(?)");
 		
-		$result = $query->fetchAll($tags);
+		$query->execute(array($tags));
 		
 	}
 
