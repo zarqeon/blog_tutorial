@@ -93,6 +93,10 @@
 		
 		$query->execute(array($tags));
 		
+		$q_result = $query->fetchAll();
+		
+		var_dump($q_result);
+		
 	}
 
 	if(isset($_POST['Előnézet'])){
@@ -102,7 +106,6 @@
 		
 	}
 
-	var_dump($query);
 	
 ?>
 
