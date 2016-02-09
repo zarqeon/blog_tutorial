@@ -89,7 +89,7 @@
 
 		}
 		
-		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN(?)");
+		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN(tizenot)");
 		
 		$query->execute(array($tags));
 		
@@ -99,8 +99,10 @@
 		
 		processTags($connect, $tags);
 
+		
 	}
 
+	var_dump($query);
 	
 ?>
 
