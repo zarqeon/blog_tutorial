@@ -1,8 +1,8 @@
 <?php
 
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
+	//ini_set('display_startup_errors', 1);
+	//error_reporting(E_ALL);
 	
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
@@ -85,17 +85,20 @@
 		//$statement->execute(array($tags));
 		
 		$exploded_tags = explode(",", $tags);
+		
 		foreach($exploded_tags as $single_tag){
-
+		
+		$dot = '"' . $single_tag .  '"' . $exploded_tags;
+			
 		}
 		
-		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN(tizenot)");
+		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN(?)");
 		
 		$query->execute(array($tags));
 		
 		$q_result = $query->fetchAll();
 		
-		var_dump($q_result);
+		var_dump($single_tag);
 		
 	}
 
