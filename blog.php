@@ -88,7 +88,7 @@
 		
 		foreach($exploded_tags as $single_tag){
 		
-		$dot .= '"'. $single_tag . ',"';
+		$dot .= '"'. $single_tag . '",';
 		var_dump($dot);
 			
 		}
