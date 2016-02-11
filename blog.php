@@ -1,8 +1,8 @@
 <?php
 
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
+	//ini_set('display_startup_errors', 1);
+	//error_reporting(E_ALL);
 	
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
@@ -88,8 +88,8 @@
 		
 		foreach($exploded_tags as $single_tag){
 		
-		$dot .= '"'. $single_tag . '",';
-			
+		$dot .= '"'. trim($single_tag) . '",';
+		
 		}
 		
 		$trimmed = rtrim ($dot, ",");
