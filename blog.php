@@ -89,17 +89,17 @@
 		foreach($exploded_tags as $single_tag){
 		
 		$dot .= '"'. $single_tag . '",';
-		var_dump($dot);
 			
 		}
 		
 		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN(?)");
-		
-		$query->execute(array($tags));
+
+		$query->execute(array($trimmed));
 		
 		$q_result = $query->fetchAll();
 		
 		$trimmed = rtrim ($dot, ",");
+		var_dump($trimmed);
 		
 	}
 
