@@ -94,7 +94,7 @@
 		
 		$trimmed = rtrim ($dot, ",");
 		
-		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN($trimmed)");
+		$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");
 
 		$query->execute(array($trimmed));
 		
