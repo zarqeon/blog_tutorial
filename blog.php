@@ -92,14 +92,15 @@
 			
 		}
 		
-		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN(?)");
+		$trimmed = rtrim ($dot, ",");
+		
+		$query = $connect->prepare("SELECT ID FROM tag WHERE tag IN($trimmed)");
 
 		$query->execute(array($trimmed));
 		
 		$q_result = $query->fetchAll();
 		
-		$trimmed = rtrim ($dot, ",");
-		var_dump($trimmed);
+		var_dump($q_result);
 		
 	}
 
