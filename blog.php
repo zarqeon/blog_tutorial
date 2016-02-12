@@ -1,8 +1,8 @@
 <?php
 
-	//ini_set('display_errors', 1);
-	//ini_set('display_startup_errors', 1);
-	//error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 	
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
@@ -88,19 +88,12 @@
 		
 		foreach($exploded_tags as $single_tag){
 		
-		$dot .= '"'. trim($single_tag) . '",';
+			$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");
+			$query->execute(array($single_tag));
+			$q_result = $query->fetchAll();
+			var_dump($q_result);
 		
 		}
-		
-		$trimmed = rtrim ($dot, ",");
-		
-		$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");
-
-		$query->execute(array($trimmed));
-		
-		$q_result = $query->fetchAll();
-		
-		var_dump($q_result);
 		
 	}
 
