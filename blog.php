@@ -1,8 +1,8 @@
 <?php
 
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
+	//ini_set('display_startup_errors', 1);
+	//error_reporting(E_ALL);
 	
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
@@ -81,18 +81,20 @@
 	
 	function processTags ($connect, $tags){
 		
-		//$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
-		//$statement->execute(array($tags));
-		
 		$exploded_tags = explode(",", $tags);
 		
 		foreach($exploded_tags as $single_tag){
-		
+			$single_tag = trim($single_tag);
 			$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");
 			$query->execute(array($single_tag));
-			$q_result = $query->fetchAll();
+			$q_result = $query->fetchColumn();
 			var_dump($q_result);
 		
+		}
+		
+		if(empty($q_result)){
+			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
+			$statement->execute(array($tags));
 		}
 		
 	}
