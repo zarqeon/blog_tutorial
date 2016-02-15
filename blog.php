@@ -90,11 +90,11 @@
 			$q_result = $query->fetchColumn();
 			var_dump($q_result);
 		
-		}
-		
 		if(empty($q_result)){
 			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
-			$statement->execute(array($tags));
+			$statement->execute(array($single_tag));
+		}
+		
 		}
 		
 	}
