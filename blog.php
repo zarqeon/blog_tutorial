@@ -93,6 +93,7 @@
 		if(empty($q_result)){
 			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
 			$statement->execute(array($single_tag));
+			echo $connect->lastInsertId();
 		}
 		
 		}
