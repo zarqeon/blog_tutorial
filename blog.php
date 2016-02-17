@@ -1,8 +1,8 @@
 <?php
 
-	//ini_set('display_errors', 1);
-	//ini_set('display_startup_errors', 1);
-	//error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 	
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
@@ -88,25 +88,27 @@
 			$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");
 			$query->execute(array($single_tag));
 			$q_result = $query->fetchColumn();
-			var_dump($q_result);
+			
+			$statement = $connect->prepare("INSERT INTO posttotag(tag_id) VALUES(?)");
+			$statement->execute(array($q_result));
+			
 		
 		if(empty($q_result)){
 			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
 			$statement->execute(array($single_tag));
 			echo $connect->lastInsertId();
-		}
-		
+		}		
 		}
 		
 	}
 
 	if(isset($_POST['Előnézet'])){
-		
+	
 		processTags($connect, $tags);
 
-		
 	}
 
+	
 	
 ?>
 
