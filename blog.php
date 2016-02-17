@@ -1,8 +1,8 @@
 <?php
 
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
+	//ini_set('display_startup_errors', 1);
+	//error_reporting(E_ALL);
 	
 	echo $_POST ["textarea"];
 	$textarea = ($_POST["textarea"]);
@@ -85,18 +85,24 @@
 		
 		foreach($exploded_tags as $single_tag){
 			$single_tag = trim($single_tag);
+			
 			$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");
 			$query->execute(array($single_tag));
 			$q_result = $query->fetchColumn();
 			
-			$statement = $connect->prepare("INSERT INTO posttotag(tag_id) VALUES(?)");
-			$statement->execute(array($q_result));
+			$all_tagid = $last_id . $q_result;
 			
-		
+			$statement = $connect->prepare("INSERT INTO posttotag(tag_id) VALUES(?)");
+			$statement->execute(array($all_tagid));
+
+			
+			
+			
 		if(empty($q_result)){
 			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
 			$statement->execute(array($single_tag));
-			echo $connect->lastInsertId();
+			$last_id = $connect->lastInsertId();
+			var_dump($all_tagid);
 		}		
 		}
 		
