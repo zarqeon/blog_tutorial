@@ -79,7 +79,7 @@
 	
 	
 	
-	function processTags ($connect, $tags){
+	function processTags ($connect, $tags, $post_id){
 		
 		$exploded_tags = explode(",", $tags);
 		
@@ -109,7 +109,7 @@
 
 	if(isset($_POST['Közzétesz'])){
 	
-		processTags($connect, $tags);
+		processTags($connect, $tags, $post_id);
 
 	}
 
