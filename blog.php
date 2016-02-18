@@ -71,7 +71,7 @@
 			
 			$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 			$statement->execute(array($textarea));
-			echo $connect->lastInsertId();
+			$post_id = $connect->lastInsertId();
 		}
 	}	
 	
@@ -101,11 +101,13 @@
 			$statement = $connect->prepare("INSERT INTO posttotag(tag_id) VALUES(?)");
 			$statement->execute(array($all_tagid));
 		
+			$stmnt = $connect->prepare("INSERT INTO posttotag(post_id) VALUES(?)");
+			$stmnt->execute(array($post_id));
 		}
 		
 	}
 
-	if(isset($_POST['Előnézet'])){
+	if(isset($_POST['Közzétesz'])){
 	
 		processTags($connect, $tags);
 
