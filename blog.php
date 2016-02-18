@@ -98,11 +98,8 @@
 			$all_tagid = $last_id;
 		
 		}
-			$statement = $connect->prepare("INSERT INTO posttotag(tag_id) VALUES(?)");
-			$statement->execute(array($all_tagid));
-		
-			$stmnt = $connect->prepare("INSERT INTO posttotag(post_id) VALUES(?)");
-			$stmnt->execute(array($post_id));
+			$statement = $connect->prepare("INSERT INTO posttotag(tag_id, post_id) VALUES(?,?)");
+			$statement->execute(array($all_tagid, $post_id));
 		}
 		
 	}
