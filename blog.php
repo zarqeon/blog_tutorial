@@ -89,22 +89,21 @@
 			$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");
 			$query->execute(array($single_tag));
 			$q_result = $query->fetchColumn();
-			
-			$all_tagid = $last_id . $q_result;
-			
-			$statement = $connect->prepare("INSERT INTO posttotag(tag_id) VALUES(?)");
-			$statement->execute(array($all_tagid));
 
-			
-			
-			
 		if(empty($q_result)){
 			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
 			$statement->execute(array($single_tag));
 			$last_id = $connect->lastInsertId();
-			var_dump($all_tagid);
-		}		
+
+		
 		}
+
+			$all_tagid = $last_id . $q_result;
+			var_dump($last_id);
+			$statement = $connect->prepare("INSERT INTO posttotag(tag_id) VALUES(?)");
+			$statement->execute(array($all_tagid));
+		
+		die;}
 		
 	}
 
