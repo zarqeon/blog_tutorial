@@ -19,6 +19,87 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+/*
+ * validate
+ * validál egy változót
+ * akkor valid egy változó, hogy ha van benne valami (nem üres)
+ *
+ * @param mixed $variable a validálandó változó
+ * @return boolean valid-e a változó vagy sem
+ */
+function validate($variable)
+{
+	//HA a változó nem üres
+	if(!empty($variable))	
+	{
+		return true;
+	}
+
+	return false;	
+}
+
+/*
+validate_button
+két változót validál
+*/
+
+function validate_button ($textarea, $tags)	
+{
+        //Ha a $textarára, és a $tags-ra teljesül a validate függvény, végrehajtja a kódot, tehát echózik egy új gombot a meghívás helyén.
+	if(validate($textarea) && validate($tags))	
+	{
+		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';	
+	}	
+}
+
+
+/*
+processTags függvény	
+*/
+
+function processTags ($connect, $tags, $post_id){ 
+        //szétválasztja vesszőnként a tag mezőbe beírt tagokat
+	$exploded_tags = explode(",", $tags);	
+        //lefuttat egy ciklust minden különválasztott tagra
+	foreach($exploded_tags as $single_tag){	
+                //leveszi a szóközöket a tagok mindkét végéről
+		$single_tag = trim($single_tag);	
+                //A statement végrehajt egy lekérdezést, ami kiválasztja a felvitt tag id-jét, ha már szerepel az adatbázisban
+		$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");	
+		$query->execute(array($single_tag));	
+                //Statement eredménye
+		$q_result = $query->fetchColumn();	
+		$all_tagid = $q_result;	
+		
+		//Ha a tagok közül valamelyik nem volt benne az adatbázisban, ($q_result üres)
+		if(empty($q_result)){	
+                        //Beszúrja az újonnan felvitt tagot a tag tábla tag oszlopába
+			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");	
+			$statement->execute(array($single_tag));	
+                        //Legutóbb felvitt elem ID-je
+			$last_id = $connect->lastInsertId();	
+			$all_tagid = $last_id;	
+
+		}
+                //A statement beszúrja az $all_tagid, és $post_id változókat a posttotag táblába a ciklus lefutásaikor
+		$statement = $connect->prepare("INSERT INTO posttotag(tag_id, post_id) VALUES(?,?)");	
+		$statement->execute(array($all_tagid, $post_id));	
+	}
+
+}
+
+/*
+hidden_input függvény
+Ha 
+*/
+function hidden_input ($id_post)
+{
+	if (!empty ($id_post))
+	{
+		echo "<input type='hidden' name='id' value='$id_post'>";
+	}
+}
+
 //globális változók dektlarálása
 
 $textarea = $tags = $post_id = $id_post = false;
@@ -43,39 +124,7 @@ $textarea = $tags = $post_id = $id_post = false;
 	}
 
 	
-/*
- * validate
- * validál egy változót
- * akkor valid egy változó, hogy ha van benne valami (nem üres)
- *
- * @param mixed $variable a validálandó változó
- * @return boolean valid-e a változó vagy sem
- */
-function validate($variable)
-{
-	//HA a változó nem üres
-	if(!empty($variable))	
-	{
-		return true;
-	}
 
-	return false;	
-}
-
-/*
-validate_button
-két változót validál
-HA MINDKÉT változóra teljesül a validate függvény, végrehajtja a kódot, tehát echózik egy új gombot a meghívás helyén.
-*/
-
-function validate_button ($textarea, $tags)	
-{
-
-	if(validate($textarea) && validate($tags))	
-	{
-		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';	
-	}	
-}
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');	
 
@@ -86,8 +135,9 @@ if(!empty($textarea))
 {
 
 	$repost=$textarea;	
-//HA az $id_post nem üres, végrehajtja az edit_post statementet, és fetchel egy oszlopot
+//HA az $id_post nem üres, végrehajtja az edit_post statementet.
 }	else if(!empty($id_post)) {	
+        //A statement végrehajt egy lekérdezést, ami kiválasztja egy postot, aminek az id-je megegyezik az $id_post változóval
 	$edit_post=$connect->prepare("SELECT post FROM post WHERE id=?");
 	$data=array($id_post);
 	$edit_post->execute($data);
@@ -97,86 +147,26 @@ if(!empty($textarea))
 }
 
 /*
-hidden_input függvény
-ha a változó NEM üres, echóz egy input fieldet
-*/
-function hidden_input ($id_post)
-{
-	if (!empty ($id_post))
-	{
-		echo "<input type='hidden' name='id' value='$id_post'>";
-	}
-}
-
-
-
-/*
 Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate függvény
 */
 if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
 {	
-	//ha a változó nem üres
+    
+	//ha van $id_post, frissíti az adatbázisban a blogpostot, amihez az adott id tartozik
 	if(!empty($id_post)){	
 		$stmnt = $connect->prepare("UPDATE post SET post =? WHERE id=?");
 		$stmnt->execute(array($textarea, $id_post));
 	}
 	//ha a feltétel nem teljesült
 	else{
-
+                //beszúrja a textarea tartalmát a post táblába
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($textarea));
 		$post_id = $connect->lastInsertId();
 	}
+        
+        processTags($connect, $tags, $post_id);
 }	
-
-
-/*
-processTags függvény
-felrobbantja vesszőnként a tagokat
-egy foreach loopot futtat le rajtuk
-	trimeli a tagokat
-	kiválasztja a tagokhoz kapcsolódó id-t
-	beszúrja két változó értékét a posstotag két oszlpába
-	
-*/
-
-function processTags ($connect, $tags, $post_id){ 
-
-	$exploded_tags = explode(",", $tags);	
-
-	foreach($exploded_tags as $single_tag){	
-		$single_tag = trim($single_tag);	
-
-		$query = $connect->prepare("SELECT ID FROM tag WHERE tag = '$single_tag'");	
-		$query->execute(array($single_tag));	
-		$q_result = $query->fetchColumn();	
-		$all_tagid = $q_result;	
-		
-		//HA a változó nem üres
-		//végrehajtja a statementet
-		if(empty($q_result)){	
-			$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");	
-			$statement->execute(array($single_tag));	
-			$last_id = $connect->lastInsertId();	
-			$all_tagid = $last_id;	
-
-		}
-		$statement = $connect->prepare("INSERT INTO posttotag(tag_id, post_id) VALUES(?,?)");	
-		$statement->execute(array($all_tagid, $post_id));	
-	}
-
-}
-
-/*
-HA a közzétesz le lett nyomva, meghívja a függvényt
-*/
-if(isset($_POST['Közzétesz'])){	
-
-	processTags($connect, $tags, $post_id);	
-
-}
-
-
 
 ?>
 
