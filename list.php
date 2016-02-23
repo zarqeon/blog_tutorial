@@ -15,14 +15,22 @@ foreach($result as $id ) {
     $number = $count_tag->fetchAll();//valahogy el kéne íréni hogy "$result['id']" -re hajtsa végre
 
     $echo_tags = $connect->query('SELECT tag.tag, posttotag.tag_id FROM tag INNER JOIN posttotag ON tag.ID=posttotag.tag_id WHERE post_id=98');
-    $tag_list = $echo_tags->fetchAll();
-
-    var_dump($number);
+    $tag_list = $echo_tags->fetchAll(); 
     
     echo '<a href="blog.php?id='.$id['id'].'">', $id['id'], '</a>';
     echo $id['post'];  
-    echo '(',$number, ')';
-    echo $tag_list, '<br />';
+        //minden $number tömbnek csak a nulladik elemét jeleníti meg
+        foreach($number as $numtags){
+            echo '(',$numtags['0'],')';
+        }
+    
+        //minden $tag_list tömbnek csak a 'tag' részét jeleníti meg
+        foreach($tag_list as $name)
+        {   
+            echo $name['tag'], ', ';
+        }
+        
+    echo '<br />';   
 }
 
 
