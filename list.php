@@ -1,12 +1,14 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
 $query = $connect->query('SELECT * FROM post');
 $result = $query->fetchAll();
+
+
         
 foreach($result as $id ) {
 
@@ -16,19 +18,21 @@ foreach($result as $id ) {
     $number = $count_tag->fetchColumn();//valahogy el kéne íréni hogy "$result['id']" -re hajtsa végre
 
     
-    $echo_tags = $connect->prepare('SELECT tag.tag, posttotag.tag_id FROM tag INNER JOIN posttotag ON tag.ID=posttotag.tag_id WHERE post_id=?');
+    $echo_tags = $connect->prepare('SELECT tag.tag_name, posttotag.tag_id FROM tag INNER JOIN posttotag ON tag.id=posttotag.tag_id WHERE post_id=?');
     $echo_tags->execute(array($id['id']));
     $tag_list = $echo_tags->fetchAll(); 
     
     
     
     echo '<a href="blog.php?id='.$id['id'].'">', $id['id'], '</a>';
-    echo $id['post'];  
+    echo $id['post_text'];  
     echo '(', $number, ')';    
+    
+   
     
     foreach($tag_list as $name)
     {   
-        echo $name['tag'], ', ';
+        echo '<a href="tag_post.php?tag='.$name['tag_id'].'">', $name['tag_name'], '</a>', ', ';
     }
     
     echo '<br />';   
