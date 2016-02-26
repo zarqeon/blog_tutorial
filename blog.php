@@ -23,8 +23,50 @@ error_reporting(E_ALL);
 ide jönne a két calss
 */
 
+/**
+ * Class: Post
+ * egy blog poszt szőröstül bőröstül
+ *
+ */
 class classPost {
 
+	/**
+	 * text
+	 * a blog post szövege
+	 *
+	 * @var strung
+	 */
+	public $text;
+
+	/**
+	 * tags
+	 * a post-hoz tartozó tag-ek.
+	 *
+	 * @var array
+	 */
+	public $tags;
+
+	/**
+	 * id
+	 *
+	 * @var int
+	 */
+	public $id;
+	
+	/**
+	 * tableName
+	 * a tábla neve amiben a poszt lakik
+	 *
+	 * @var string
+	 */
+	private $tableName;
+
+	public function __construct($values)
+	{
+
+		//beállítjuk az objektum változóit
+		$this->setVariables($values);
+	}
 /*
 hidden_input függvény 
 */
@@ -40,7 +82,29 @@ public function hidden_input ($id_post)
 
 class classTag {
     //változók
-    
+	/**
+	 * tag id
+	 *
+	 * @var int
+	 */
+	public $id;
+
+	/**
+	 * name
+	 * a tag neve
+	 *
+	 * @var string
+	 */
+	public $name;	
+
+	/**
+	 * tableName
+	 * a tábla neve amiben a tag lakik.
+	 *
+	 * @var string
+	 */
+	private $tableName;
+	
     //függvények
     
     public function processTags ($connect, $tags, $post_id){ 
