@@ -61,12 +61,6 @@ class classPost {
 	 */
 	private $tableName;
 
-	public function __construct($values)
-	{
-
-		//beállítjuk az objektum változóit
-		$this->setVariables($values);
-	}
 /*
 hidden_input függvény 
 */
@@ -79,6 +73,15 @@ public function hidden_input ($id_post)
 }
     
 }
+
+$new_post = new classPost ();
+$new_post->text = $text;
+$new_post->tags =$tags;
+$new_post->id =$id;
+$new_post->tableName =$tableName; 
+
+
+var_dump ($new_post);
 
 class classTag {
     //változók
