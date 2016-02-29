@@ -28,119 +28,10 @@ ide jönne a két calss
  * egy blog poszt szőröstül bőröstül
  *
  */
-class classPost {
 
-	/**
-	 * text
-	 * a blog post szövege
-	 *
-	 * @var strung
-	 */
-	public $text;
+include 'classPost.php';
 
-	/**
-	 * tags
-	 * a post-hoz tartozó tag-ek.
-	 *
-	 * @var array
-	 */
-	public $tags;
-
-	/**
-	 * id
-	 *
-	 * @var int
-	 */
-	public $id;
-	
-	/**
-	 * tableName
-	 * a tábla neve amiben a poszt lakik
-	 *
-	 * @var string
-	 */
-	private $tableName;
-
-/*
-hidden_input függvény 
-*/
-public function hidden_input ($id_post)
-{
-    if (!empty ($id_post))
-    {
-	echo "<input type='hidden' name='id' value='$id_post'>";
-    }
-}
-    
-}
-
-$new_post = new classPost ();
-$new_post->text = $text;
-$new_post->tags =$tags;
-$new_post->id =$id;
-$new_post->tableName =$tableName; 
-
-
-var_dump ($new_post);
-
-class classTag {
-    //változók
-	/**
-	 * tag id
-	 *
-	 * @var int
-	 */
-	public $id;
-
-	/**
-	 * name
-	 * a tag neve
-	 *
-	 * @var string
-	 */
-	public $name;	
-
-	/**
-	 * tableName
-	 * a tábla neve amiben a tag lakik.
-	 *
-	 * @var string
-	 */
-	private $tableName;
-	
-    //függvények
-    
-    public function processTags ($connect, $tags, $post_id){ 
-        //szétválasztja vesszőnként a tag mezőbe beírt tagokat
-	$exploded_tags = explode(",", $tags);	
-        //lefuttat egy ciklust minden különválasztott tagra
-	foreach($exploded_tags as $single_tag){	
-                //leveszi a szóközöket a tagok mindkét végéről
-		$single_tag = trim($single_tag);	
-                //A statement végrehajt egy lekérdezést, ami kiválasztja a felvitt tag id-jét, ha már szerepel az adatbázisban
-		$query = $connect->prepare("SELECT id FROM tag WHERE tag_name = '$single_tag'");	
-		$query->execute(array($single_tag));	
-                //Statement eredménye
-		$q_result = $query->fetchColumn();	
-		$all_tagid = $q_result;	
-		
-		//Ha a tagok közül valamelyik nem volt benne az adatbázisban, ($q_result üres)
-		if(empty($q_result)){	
-                        //Beszúrja az újonnan felvitt tagot a tag tábla tag oszlopába
-			$statement = $connect->prepare("INSERT INTO tag(tag_name)VALUES(?)");	
-			$statement->execute(array($single_tag));	
-                        //Legutóbb felvitt elem ID-je
-			$last_id = $connect->lastInsertId();	
-			$all_tagid = $last_id;	
-
-		}
-                //A statement beszúrja az $all_tagid, és $post_id változókat a posttotag táblába a ciklus lefutásaikor
-		$statement = $connect->prepare("INSERT INTO posttotag(tag_id, post_id) VALUES(?,?)");	
-		$statement->execute(array($all_tagid, $post_id));	
-	}
-
-}
-}
+include 'classTag.php';
 
 /*
  * validate
@@ -208,7 +99,15 @@ $textarea = $tags = $post_id = $id_post = false;
 		$id_post = $_REQUEST['id'];
 	}
 
-	
+//classPost példányosítás        
+        
+$new_post = new classPost ();
+$new_post->text = $text;
+$new_post->tags =$tags;
+$new_post->id =$id;
+$new_post->tableName =$tableName; 	
+
+var_dump ($new_post);
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');	
