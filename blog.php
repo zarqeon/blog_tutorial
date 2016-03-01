@@ -106,12 +106,17 @@ $new_post->text =$textarea;
 $new_post->tags =$tags;//<<valahogy ide kellene a $new_tag->name
 
 
+$separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
 
-$new_tag = new classTag ();
-$new_tag->name =$single_tag;//<<nem használható a classon kívül a $single_tag
+foreach($separated_tag as $singular_tag){
+    $new_tag = new classTag ();
+    $new_tag->name =$singular_tag;
+    
+    $tag_array[]=$new_tag;
+}	
 
-	
-//var_dump ($new_post);
+
+var_dump ($tag_array);
 
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
