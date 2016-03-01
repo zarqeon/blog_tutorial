@@ -100,11 +100,6 @@ $textarea = $tags = $post_id = $id_post = false;
 	}
 
 //classPost példányosítás        
-        
-$new_post = new classPost ();
-$new_post->text =$textarea;
-$new_post->tags =$tags;//<<valahogy ide kellene a $new_tag->name
-
 
 $separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
 
@@ -115,9 +110,11 @@ foreach($separated_tag as $singular_tag){
     $tag_array[]=$new_tag;
 }	
 
+$new_post = new classPost ();
+$new_post->text =$textarea;
+$new_post->tags =$tag_array;//<<valahogy ide kellene a $new_tag->name
 
-var_dump ($tag_array);
-
+var_dump ($new_post);
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');	
