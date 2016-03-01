@@ -99,20 +99,34 @@ $textarea = $tags = $post_id = $id_post = false;
 		$id_post = $_REQUEST['id'];
 	}
 
-//classPost példányosítás        
-
+       
+//classTag példányosítás 
+        
 $separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
 
 foreach($separated_tag as $singular_tag){
     $new_tag = new classTag ();
     $new_tag->name =$singular_tag;
-    
     $tag_array[]=$new_tag;
 }	
 
-$new_post = new classPost ();
-$new_post->text =$textarea;
-$new_post->tags =$tag_array;//<<valahogy ide kellene a $new_tag->name
+//classPost példányosítás 
+
+
+$attributes = [
+'text' => '$textarea',
+'tags' => '$tag_array'];
+
+$new_post = new classPost ($attributes);
+
+class classPost {//<<ez nem szerepelhet kétszer
+    public function __construct($attributes){//<<ennek a classPost.php-ben kellene lennie, de nem fér a fejembe hogy adhatnánk oda neki az $attribute változót
+    
+    $new_post->text =$textarea;
+    $new_post->tags =$tag_array;
+    
+    }
+}
 
 var_dump ($new_post);
 
