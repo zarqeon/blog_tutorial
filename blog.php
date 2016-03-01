@@ -102,12 +102,17 @@ $textarea = $tags = $post_id = $id_post = false;
 //classPost példányosítás        
         
 $new_post = new classPost ();
-$new_post->text = $text;
-$new_post->tags =$tags;
-$new_post->id =$id;
-$new_post->tableName =$tableName; 	
+$new_post->text =$textarea;
+$new_post->tags =$tags;//<<valahogy ide kellene a $new_tag->name
 
-var_dump ($new_post);
+
+
+$new_tag = new classTag ();
+$new_tag->name =$single_tag;//<<nem használható a classon kívül a $single_tag
+
+	
+//var_dump ($new_post);
+
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');	
