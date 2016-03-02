@@ -114,12 +114,11 @@ foreach($separated_tag as $singular_tag){
 
 
 $attributes = [
-'text' => '$textarea',
-'tags' => '$tag_array'];
+'text' => $textarea,
+'tags' => $tag_array];
 
 $new_post = new classPost ($attributes);
 
-var_dump ($new_post);
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');	
