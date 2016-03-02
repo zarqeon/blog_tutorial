@@ -44,10 +44,11 @@ public function hidden_input ($id_post)
     }
 }
     
+
 public function __construct($attributes){
     
-    $textarea = $_POST['textarea'];
-    $tags = $_POST['tags'];
+    $textarea = $attributes['text'];
+    $tags = $attributes['tags'];
     
     $separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
 
@@ -61,7 +62,7 @@ public function __construct($attributes){
     $new_post->text =$textarea;
     $new_post->tags =$tag_array;
    
-    var_dump ($attributes);
+    var_dump ($tags);
 }
 }
 ?>
