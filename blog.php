@@ -29,7 +29,7 @@ ide jönne a két calss
  *
  */
 
-include 'classPost.php';
+
 
 include 'classTag.php';
 
@@ -120,6 +120,13 @@ $attributes = [
 $new_post = new classPost ($attributes);
 
 class classPost {//<<ez nem szerepelhet kétszer
+    
+    include 'classPost.php';
+    
+    $attributes = [
+    'text' => '$textarea',
+    'tags' => '$tag_array'];
+    
     public function __construct($attributes){//<<ennek a classPost.php-ben kellene lennie, de nem fér a fejembe hogy adhatnánk oda neki az $attribute változót
     
     $new_post->text =$textarea;

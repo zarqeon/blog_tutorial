@@ -1,6 +1,6 @@
 <?php
 
-class classPost {
+
 
 	/**
 	 * text
@@ -44,6 +44,6 @@ public function hidden_input ($id_post)
     }
 }
     
-}
+
 
 ?>
