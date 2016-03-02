@@ -46,10 +46,7 @@ public function hidden_input ($id_post)
     
 
 public function __construct($attributes){
-    
-    $textarea = $attributes['text'];
-    $tags = $attributes['tags'];
-    
+ 
     $separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
 
     foreach($separated_tag as $singular_tag)
@@ -59,10 +56,9 @@ public function __construct($attributes){
     $tag_array[]=$new_tag;
     }
     
-    $new_post->text =$textarea;
-    $new_post->tags =$tag_array;
-   
-    var_dump ($tags);
+    $this->text =$attributes['text'];
+    $this->tags =$attributes['tags'];
+    
 }
 }
 ?>
