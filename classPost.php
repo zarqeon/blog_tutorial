@@ -1,6 +1,6 @@
 <?php
 
-
+class classPost {
 
 	/**
 	 * text
@@ -44,6 +44,12 @@ public function hidden_input ($id_post)
     }
 }
     
-
+public function __construct($attributes){
+    
+    $new_post->text =$textarea;
+    $new_post->tags =$tag_array;
+    
+    
+}
 
 ?>
