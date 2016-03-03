@@ -47,20 +47,23 @@ public function hidden_input ($id_post)
 
 public function __construct($attributes){
  
-    var_dump($attributes);
     
-    $separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
-
+    $separated_tag = explode(",", $attributes['tags']);//szétválaszjta a tagokat a vesszőnél
+    
     foreach($separated_tag as $singular_tag)
-    {
+    {   
     $new_tag = new classTag ();
+    
     $new_tag->name =$singular_tag;
     $tag_array[]=$new_tag;
+    
+    var_dump ($new_tag);
     }
+    
+    var_dump ($new_tag);
     
     $this->text =$attributes['text'];
     $this->tags =$attributes['tags'];
-    
 }
 }
 ?>

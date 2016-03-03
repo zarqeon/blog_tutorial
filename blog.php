@@ -105,12 +105,10 @@ $textarea = $tags = $post_id = $id_post = false;
 
 $attributes = [
 'text' => $textarea,
-'tags' => $tag_array];
+'tags' => $tags];
 
 
 $new_post = new classPost ($attributes);
-
-var_dump ($new_post);
 
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
