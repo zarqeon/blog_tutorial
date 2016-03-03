@@ -47,6 +47,8 @@ public function hidden_input ($id_post)
 
 public function __construct($attributes){
  
+    var_dump($attributes);
+    
     $separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
 
     foreach($separated_tag as $singular_tag)

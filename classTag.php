@@ -49,14 +49,20 @@ class classTag {
                         //Legutóbb felvitt elem ID-je
 			$last_id = $connect->lastInsertId();	
 			$all_tagid = $last_id;	
-
 		}
                 //A statement beszúrja az $all_tagid, és $post_id változókat a posttotag táblába a ciklus lefutásaikor
 		$statement = $connect->prepare("INSERT INTO posttotag(tag_id, post_id) VALUES(?,?)");	
 		$statement->execute(array($all_tagid, $post_id));	
 	}
 
-}
+       
 }
 
+public function __construct($attributes){
+        
+    
+    
+}
+
+}
 ?>

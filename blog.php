@@ -101,15 +101,7 @@ $textarea = $tags = $post_id = $id_post = false;
 
         
 //classPost példányosítás 
-                      
-        
-$separated_tag = explode(",", $tags);//szétválaszjta a tagokat a vesszőnél
-
-foreach($separated_tag as $singular_tag){
-    $new_tag = new classTag ();//<<ide kellene breakni az $attributesból az aktuális tagot
-    $new_tag->name =$singular_tag;
-    $tag_array[]=$new_tag;
-}	
+                      	
 
 $attributes = [
 'text' => $textarea,
@@ -118,6 +110,7 @@ $attributes = [
 
 $new_post = new classPost ($attributes);
 
+var_dump ($new_post);
 
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
