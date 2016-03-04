@@ -63,14 +63,28 @@ public function __construct($attributes){
     $this->tags =$tag_array;
     
     foreach($attributes as $key => $value){
-    $this->assignKeyValue ($key, $value);
+	    //beállítja az attributes-ban megadott attribútumok értékét
+	    //$this->setter ($key, $value);
+	    
+	//what the actual fuck does this do? is it magic? hell it is!
+	call_user_func(array($this, 'set'.ucfirst($key)), $value);
     }
     
 }
 
-function assignKeyValue ($key, $value)
+private function setter ($key, $value)
 {
     $this->$key = $value;
+}
+
+public function setId($value)
+{
+	$this->setter('id', $value);
+}
+
+public function setText($value)
+{
+	$this->setter('text', $value);
 }
 
 }
