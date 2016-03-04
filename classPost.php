@@ -52,16 +52,27 @@ public function __construct($attributes){
     
     foreach($separated_tag as $singular_tag)
     {   
-    $new_tag = new classTag ();
-    
-    $new_tag->name =$singular_tag;
-    $tag_array[]=$new_tag;
+        $new_tag = new classTag (); 
+        $new_tag->name =$singular_tag;
+        $tag_array[]=$new_tag;
     }
     
     //var_dump ($new_tag);
     
     $this->text =$attributes['text'];
     $this->tags =$tag_array;
+    
+    foreach($attributes as $key => $value){
+    assignKeyValue ();
+    }
+    
+    var_dump($value);
 }
+
+function assignKeyValue ($key, $value)
+{
+    $this->$key = $value;
+}
+
 }
 ?>
