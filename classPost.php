@@ -56,14 +56,12 @@ public function __construct($attributes){
     
     $new_tag->name =$singular_tag;
     $tag_array[]=$new_tag;
-    
-    var_dump ($new_tag);
     }
     
-    var_dump ($new_tag);
+    //var_dump ($new_tag);
     
     $this->text =$attributes['text'];
-    $this->tags =$attributes['tags'];
+    $this->tags =$tag_array;
 }
 }
 ?>
