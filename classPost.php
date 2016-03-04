@@ -63,11 +63,16 @@ public function __construct($attributes){
     $this->tags =$tag_array;
     
     foreach($attributes as $key => $value){
-	    //beállítja az attributes-ban megadott attribútumok értékét
-	    //$this->setter ($key, $value);
-	    
+	//beállítja az attributes-ban megadott attribútumok értékét
+	//$this->setter ($key, $value);    
 	//what the actual fuck does this do? is it magic? hell it is!
-	call_user_func(array($this, 'set'.ucfirst($key)), $value);
+        if(method_exists()){//nem tudom hogy itt mit nézzen meg hogy létezik e pontosan.
+            call_user_func(array($this, 'set'.ucfirst($key)), $value);
+        }
+        else{
+            setter($key, $value);
+        }
+        
     }
     
 }
