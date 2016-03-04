@@ -63,10 +63,9 @@ public function __construct($attributes){
     $this->tags =$tag_array;
     
     foreach($attributes as $key => $value){
-    assignKeyValue ();
+    $this->assignKeyValue ($key, $value);
     }
     
-    var_dump($value);
 }
 
 function assignKeyValue ($key, $value)
