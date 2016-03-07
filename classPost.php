@@ -66,11 +66,16 @@ public function __construct($attributes){
 	//beállítja az attributes-ban megadott attribútumok értékét
 	//$this->setter ($key, $value);    
 	//what the actual fuck does this do? is it magic? hell it is!
-        if(method_exists()){//nem tudom hogy itt mit nézzen meg hogy létezik e pontosan.
-            call_user_func(array($this, 'set'.ucfirst($key)), $value);
+        
+       $function_name = array($this, 'set'.ucfirst($key)); 
+       
+       var_dump ($function_name);
+        
+        if(method_exists($function_name)){//nem tudom hogy itt mit nézzen meg hogy létezik e pontosan.
+            call_user_func($function_name, $value);
         }
         else{
-            setter($key, $value);
+            $this->setter($key, $value);
         }
         
     }
