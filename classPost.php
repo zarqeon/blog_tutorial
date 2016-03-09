@@ -97,5 +97,19 @@ public function setText($value)
 	$this->setter('text', $value);
 }
 
+public function setTag ($value)
+{
+    /*
+    $separated_tag = explode(",", $attributes['tags']);//szétválaszjta a tagokat a vesszőnél
+    
+    foreach($separated_tag as $singular_tag)
+    {   
+        $new_tag = new classTag (); 
+        $new_tag->name =$singular_tag;
+        $tag_array[]=$new_tag;
+    }
+    */
+    
 }
+
 ?>
