@@ -57,7 +57,7 @@ public function __construct($attributes){
         
        $function_name = 'set'.ucfirst($key);
        
-       var_dump ($function_name);
+
         
         if(method_exists($this, $function_name)){//nem tudom hogy itt mit nézzen meg hogy létezik e pontosan.
             call_user_func(array($this, $function_name), $value);
@@ -82,14 +82,18 @@ public function setId($value)
 
 public function setText($value)
 {
-        var_dump ($value);
+
 	$this->setter('text', $value);
 }
 
 public function setTag ($value)
 {   
     
+    
+    
     $separated_tag = explode(",", $attributes['tags']);
+    
+var_dump ($separated_tag);//<<elvileg ki kéne adnia itt a felbontott tagokat, de még csak ki sem írja hogy nulla, mint ha le se futna a függvény
     
     foreach($separated_tag as $singular_tag)
     {   
