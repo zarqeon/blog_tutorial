@@ -47,20 +47,19 @@ public function hidden_input ($id_post)
 
 public function __construct($attributes){
 
-    $this->text =$attributes['text'];
-    $this->tags =$tag_array;
-    
     foreach($attributes as $key => $value){
+        
 	//beállítja az attributes-ban megadott attribútumok értékét
 	//$this->setter ($key, $value);    
 	//what the actual fuck does this do? is it magic? hell it is!
-        
+
        $function_name = 'set'.ucfirst($key);
-       
 
         
         if(method_exists($this, $function_name)){//nem tudom hogy itt mit nézzen meg hogy létezik e pontosan.
             call_user_func(array($this, $function_name), $value);
+            
+            //var_dump ($value);
         }
         else{
             $this->setter($key, $value);
@@ -86,23 +85,26 @@ public function setText($value)
 	$this->setter('text', $value);
 }
 
-public function setTag ($value)
+public function setTags ($value)
 {   
     
+    //var_dump ($value);
     
+    $separated_tag = explode(",", $value);
     
-    $separated_tag = explode(",", $attributes['tags']);
-    
-var_dump ($separated_tag);//<<elvileg ki kéne adnia itt a felbontott tagokat, de még csak ki sem írja hogy nulla, mint ha le se futna a függvény
     
     foreach($separated_tag as $singular_tag)
     {   
+        //var_dump ($singular_tag);
+        
         $new_tag = new classTag (); 
-        $new_tag->name =$singular_tag;
-        $tag_array[]=$new_tag;
+        $new_tag->name =$singular_tag;        
+        
+        //var_dump ($new_tag);
+        
+        $this->tags[] = $new_tag;
     }
 
-    
 }
 }
 ?>

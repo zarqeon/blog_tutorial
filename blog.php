@@ -103,15 +103,14 @@ $textarea = $tags = $post_id = $id_post = false;
 //classPost példányosítás 
                       	
 
+        
 $attributes = [
 'text' => $textarea,
 'tags' => $tags];
 
-
 $new_post = new classPost ($attributes);
 
-var_dump($new_post);
-
+var_dump ($new_post);
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');	
