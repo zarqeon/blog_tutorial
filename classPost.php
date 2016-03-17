@@ -220,10 +220,7 @@ public function setTags ($value)
 
 		$new_tag->name =$singular_tag;        
 
-		$tag_array[]=$new_tag->name;
-
 		$this->tags[] = $new_tag;
-
 	}
 
 }

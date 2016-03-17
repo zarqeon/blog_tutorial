@@ -58,10 +58,27 @@ class classTag {
        
 }
 
-public function __construct($tag_array){
+public function __construct($attr){//<<ide az az array kell, amibe majd becsomagoljuk a tag attributumait.
         
-    var_dump ($tag_array);
     
+    foreach ($attr as $key => $value){//<<és ide is az
+    
+        $function_name = 'set'.ucfirst($key);
+        
+        if(method_exists($this, $function_name)){  
+            call_user_func(array($this, $function_name), $value);      
+        }
+        else{
+            $this->defaultSetter($key, $value);
+        }
+        
+    }
+    
+}
+
+private function defaultSetter ($key, $value)
+{
+    $this->$key = $value;
 }
 
 }
