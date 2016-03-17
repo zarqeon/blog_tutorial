@@ -58,9 +58,9 @@ class classTag {
        
 }
 
-public function __construct($attributes){
+public function __construct($tag_array){
         
-    
+    var_dump ($tag_array);
     
 }
 

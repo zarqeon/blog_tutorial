@@ -74,17 +74,6 @@ private function setter ($key, $value)
     $this->$key = $value;
 }
 
-public function setId($value)
-{
-	$this->setter('id', $value);
-}
-
-public function setText($value)
-{
-
-	$this->setter('text', $value);
-}
-
 public function setTags ($value)
 {   
     
@@ -95,16 +84,16 @@ public function setTags ($value)
     
     foreach($separated_tag as $singular_tag)
     {   
-        //var_dump ($singular_tag);
+        $new_tag = new classTag ($tag_array); 
         
-        $new_tag = new classTag (); 
         $new_tag->name =$singular_tag;        
         
-        //var_dump ($new_tag);
+        $tag_array[]=$new_tag->name;
         
         $this->tags[] = $new_tag;
+        
     }
-
+    
 }
 }
 ?>
