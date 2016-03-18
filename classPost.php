@@ -203,7 +203,7 @@ public function __construct($attributes){
  */
 private function defaultSetter ($key, $value)
 {
-	$this->$key = $value;
+    $this->$key = $value;
 }
 
 public function setTags ($value)
@@ -216,13 +216,17 @@ public function setTags ($value)
 
 	foreach($separated_tag as $singular_tag)
 	{   
-		$new_tag = new classTag ($tag_array); 
+          
+            $tag_array = array('name'=>$singular_tag);
+            
+            $new_tag = new classTag ($tag_array); 
 
-		$new_tag->name =$singular_tag;        
+            $new_tag->name =$singular_tag;        
 
-		$this->tags[] = $new_tag;
+            $this->tags[] = $new_tag;   
+   
 	}
-
+        
 }
 }
 ?>
