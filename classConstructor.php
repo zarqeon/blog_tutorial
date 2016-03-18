@@ -107,8 +107,6 @@ public function __construct($tag_array){
 	//ha az attribútum neve (vagyis a $key) az volt, hogy 'text',
 	//akkor a setter függvény neve az lesz hogy 'setText'
         $function_name = 'set'.ucfirst($key);
-        
-        var_dump ($value);
         //megnézi, hogy létezik-e ebben az osztályban ez a setter függvény
         if(method_exists($this, $function_name)){  
         //ha LÉTEZIK akkor meghívja, és átadja neki az attribútum értékét,

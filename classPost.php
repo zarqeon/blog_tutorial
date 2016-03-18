@@ -1,6 +1,6 @@
 <?php
 
-include 'classConstructor.php';   
+require_once 'classConstructor.php';   
 
 /**
  * rövidtávú cél:
@@ -73,24 +73,15 @@ public function hidden_input ($id_post)
 
 public function setTags ($value)
 {   
-
-	//var_dump ($value);
-
 	$separated_tag = explode(",", $value);
-
 
 	foreach($separated_tag as $singular_tag)
 	{   
-          
+            $singular_tag = trim($singular_tag);
             $tag_array = array('name'=>$singular_tag);
-            
             $new_tag = new classTag ($tag_array);       
-
             $this->tags[] = $new_tag;   
-   
-	}
-        
+	}  
 }
-
 }
 ?>

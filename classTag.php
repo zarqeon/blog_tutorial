@@ -1,6 +1,6 @@
 <?php
 
-include 'classConstructor.php';   
+require_once 'classConstructor.php';   
 
 class classTag extends classConstructor {
     //változók
