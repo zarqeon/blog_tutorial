@@ -118,9 +118,11 @@ $connect = new PDO ('mysql:host=localhost;dbname=blog','root','');
 /*
 HA a $textarea nem üres, $repost = textarea
 */
+
+$repost = "";
+
 if(!empty($textarea)) 
 {
-
 	$repost=$textarea;	
 //HA az $id_post nem üres, végrehajtja az edit_post statementet.
 }	else if(!empty($id_post)) {	
@@ -154,6 +156,17 @@ if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags)))
         
         processTags($connect, $tags, $post_id);
 }	
+
+/*
+hidden_input függvény 
+*/
+function hidden_input ($id_post)
+{
+    if (!empty ($id_post))
+    {
+	echo "<input type='hidden' name='id' value='$id_post'>";
+    }
+}
 
 ?>
 

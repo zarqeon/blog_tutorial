@@ -57,19 +57,7 @@ class classPost extends classConstructor{
 	 *
 	 * @var string
 	 */
-	private $tableName;
-
-/*
-hidden_input függvény 
-*
-public function hidden_input ($id_post)
-{
-    if (!empty ($id_post))
-    {
-	echo "<input type='hidden' name='id' value='$id_post'>";
-    }
-}
- */    
+	private $tableName;   
 
 public function setTags ($value)
 {   
