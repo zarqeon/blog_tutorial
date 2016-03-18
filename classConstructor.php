@@ -93,8 +93,7 @@
  */
 
 
-class classConstructor {
-    
+class classConstructor {    
     
 public function __construct($tag_array){
         

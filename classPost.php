@@ -1,5 +1,7 @@
 <?php
 
+include 'classConstructor.php';   
+
 /**
  * rövidtávú cél:
  * elérni, hogy a classTag objektumnak ne kelljen kívülről beállítani az attribútumait.
@@ -67,7 +69,7 @@ public function hidden_input ($id_post)
 	echo "<input type='hidden' name='id' value='$id_post'>";
     }
 }
- */       
+ */    
 
 public function setTags ($value)
 {   
@@ -89,5 +91,6 @@ public function setTags ($value)
 	}
         
 }
+
 }
 ?>

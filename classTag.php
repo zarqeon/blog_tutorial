@@ -1,5 +1,7 @@
 <?php
 
+include 'classConstructor.php';   
+
 class classTag extends classConstructor {
     //változók
 	/**
