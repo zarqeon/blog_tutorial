@@ -1,6 +1,6 @@
 <?php
 
-class classTag {
+class classTag extends classConstructor {
     //változók
 	/**
 	 * tag id
@@ -57,31 +57,5 @@ class classTag {
 
        
 }
-
-public function __construct($tag_array){//<<ide az az array kell, amibe majd becsomagoljuk a tag attributumait.
-        
-    
-    foreach ($tag_array as $key => $value){//<<és ide is az
-    
-        $function_name = 'set'.ucfirst($key);
-        
-        var_dump ($value);
-        
-        if(method_exists($this, $function_name)){  
-            call_user_func(array($this, $function_name), $value);      
-        }
-        else{
-            $this->defaultSetter($key, $value);
-        }
-        
-    }
-    
-}
-
-private function defaultSetter ($key, $value)
-{
-    $this->$key = $value;
-}
-
 }
 ?>
