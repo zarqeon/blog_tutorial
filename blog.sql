@@ -29,7 +29,12 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `post` text COLLATE utf8_hungarian_ci NOT NULL,
+<<<<<<< HEAD
   PRIMARY KEY (`id`)
+=======
+  PRIMARY KEY (`id`),
+  FULLTEXT KEY `post` (`post`)
+>>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=77 ;
 
 --

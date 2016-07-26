@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 require_once 'Model.php';   
+=======
+require_once 'classConstructor.php';   
+>>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 
 /**
  * rövidtávú cél:
@@ -26,7 +30,11 @@ require_once 'Model.php';
  * 	- beletenni az adatbázisba egy post-ot.
  *
  */
+<<<<<<< HEAD
 class classPost extends Model{
+=======
+class classPost extends classConstructor{
+>>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 
 	/**
 	 * text
@@ -71,6 +79,9 @@ public function setTags ($value)
             $this->tags[] = $new_tag;   
 	}  
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 }
 ?>

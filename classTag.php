@@ -1,8 +1,14 @@
 <?php
 
+<<<<<<< HEAD
 require_once 'Model.php';   
 
 class classTag extends Model {
+=======
+require_once 'classConstructor.php';   
+
+class classTag extends classConstructor {
+>>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
     //változók
 	/**
 	 * tag id
@@ -60,4 +66,8 @@ class classTag extends Model {
        
 }
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
