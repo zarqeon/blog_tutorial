@@ -92,13 +92,9 @@ két változót validál
 /*új függvény, ami úgy használja a model::validate-et, mint a validate_button a validate-et*/
 
 
-public function validate ($textarea, $tags)
+public function validate ()
 {
-	
-	if(parent::validate($textarea) && parent::validate($tags))
-	{
-		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';
-	}
+	return $this->validateAttribute($this->text);
 }
 
 

@@ -155,7 +155,7 @@ private function defaultSetter ($key, $value)
  * @return boolean valid-e a változó vagy sem
  */
 
-public function validate($variable)
+public function validateAttribute($variable)
 {
 	//HA a változó nem üres
 	if(!empty($variable))	
