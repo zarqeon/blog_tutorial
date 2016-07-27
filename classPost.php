@@ -95,13 +95,16 @@ két változót validál
 public function validate ($textarea, $tags)
 {
 	
-	if(Model::validate($textarea) && Model::validate($tags))
+	if(parent::validate($textarea) && parent::validate($tags))
 	{
 		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';
 	}
 }
 
+
+
 }
+
 
 
 ?>
