@@ -171,7 +171,7 @@ validate_button
 két változót validál
 */
 
-public function validate_button ($textarea, $tags)	
+/*public function validate_button ($textarea, $tags)	
 {
         //Ha a $textarára, és a $tags-ra teljesül a validate függvény, végrehajtja a kódot, tehát echózik egy új gombot a meghívás helyén.
 	if(validate($textarea) && validate($tags))	
@@ -179,6 +179,6 @@ public function validate_button ($textarea, $tags)
 		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';	
 	}	
 }
-
+*/
 }
 ?>

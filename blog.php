@@ -34,54 +34,9 @@ include 'classPost.php';
 include 'classTag.php';
 
 /*
-<<<<<<< HEAD
 processTags függvény	
 */
 
-=======
- * validate
- * validál egy változót
- * akkor valid egy változó, hogy ha van benne valami (nem üres)
- *
- * @param mixed $variable a validálandó változó
- * @return boolean valid-e a változó vagy sem
- */
-
-function validate($variable)
-{
-	//HA a változó nem üres
-	if(!empty($variable))	
-	{
-		return true;
-	}
-
-	return false;	
-}
-
-/*
-validate_button
-két változót validál
-*/
-
-function validate_button ($textarea, $tags)	
-{
-        //Ha a $textarára, és a $tags-ra teljesül a validate függvény, végrehajtja a kódot, tehát echózik egy új gombot a meghívás helyén.
-	if(validate($textarea) && validate($tags))	
-	{
-		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';	
-	}	
-}
-
-
-/*
-processTags függvény	
-*/
-
-
-
-
-
->>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 //globális változók dektlarálása
 
 $textarea = $tags = $post_id = $id_post = false;
@@ -104,17 +59,9 @@ $textarea = $tags = $post_id = $id_post = false;
 	{
 		$id_post = $_REQUEST['id'];
 	}
-<<<<<<< HEAD
         
 //classPost példányosítás 
                     	
-=======
-
-        
-//classPost példányosítás 
-                      	
-
->>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
         
 $attributes = [
 'text' => $textarea,
@@ -125,11 +72,7 @@ $new_post = new classPost ($attributes);
 //var_dump ($new_post);
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
-<<<<<<< HEAD
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');	
-=======
-$connect = new PDO ('mysql:host=localhost;dbname=blog','root','');	
->>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 
 /*
 HA a $textarea nem üres, $repost = textarea
@@ -201,7 +144,7 @@ function hidden_input ($id_post)
 <input type="submit" name="Előnézet"value="Előnézet">
 <br />
 <?php
-validate_button($textarea, $tags); //itt hívódik meg a validate_button függvény
+classPost::validate($textarea, $tags); //itt hívódik meg a validate_button függvény
 hidden_input($id_post); //itt hívódik meg a hidden_input függvény
 ?>
 

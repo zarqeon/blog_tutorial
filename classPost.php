@@ -1,10 +1,6 @@
 <?php
 
-<<<<<<< HEAD
 require_once 'Model.php';   
-=======
-require_once 'classConstructor.php';   
->>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 
 /**
  * rövidtávú cél:
@@ -30,11 +26,7 @@ require_once 'classConstructor.php';
  * 	- beletenni az adatbázisba egy post-ot.
  *
  */
-<<<<<<< HEAD
 class classPost extends Model{
-=======
-class classPost extends classConstructor{
->>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
 
 	/**
 	 * text
@@ -79,9 +71,37 @@ public function setTags ($value)
             $this->tags[] = $new_tag;   
 	}  
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> c26e6494796d744ade0c6aa1001b7534550ea2e4
+
+/*
+validate_button
+két változót validál
+*/
+
+/*public function validate_button ($textarea, $tags)	
+{
+        //Ha a $textarára, és a $tags-ra teljesül a validate függvény, végrehajtja a kódot, tehát echózik egy új gombot a meghívás helyén.
+	if(validate($textarea) && validate($tags))	
+	{
+		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';	
+	}	
 }
+*/
+
+
+/*új függvény, ami úgy használja a model::validate-et, mint a validate_button a validate-et*/
+
+
+public function validate ($textarea, $tags)
+{
+	
+	if(Model::validate($textarea) && Model::validate($tags))
+	{
+		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';
+	}
+}
+
+}
+
+
 ?>
