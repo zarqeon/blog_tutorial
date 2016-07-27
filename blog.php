@@ -62,6 +62,12 @@ $post = new Post ([
 	'tags' => $tags
 ]);
 
+if(isset($_POST['Előnézet']) && ($_POST['textarea']) && ($_POST['tags']))
+{
+echo ($_POST['textarea']), "<br />";
+echo ($_POST['tags']);
+}
+
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
 //$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');	
