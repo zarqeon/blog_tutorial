@@ -26,7 +26,7 @@ require_once 'Model.php';
  * 	- beletenni az adatbázisba egy post-ot.
  *
  */
-class classPost extends Model{
+class Post extends Model{
 
 	/**
 	 * text
@@ -50,7 +50,7 @@ class classPost extends Model{
 	 * @var int
 	 */
 	public $id;
-	
+
 	/**
 	 * tableName
 	 * a tábla neve amiben a poszt lakik
@@ -59,48 +59,28 @@ class classPost extends Model{
 	 */
 	private $tableName;   
 
-public function setTags ($value)
-{   
-	$separated_tag = explode(",", $value);
-
-	foreach($separated_tag as $singular_tag)
+	public function setTags ($value)
 	{   
-            $singular_tag = trim($singular_tag);
-            $tag_array = array('name'=>$singular_tag);
-            $new_tag = new classTag ($tag_array);       
-            $this->tags[] = $new_tag;   
-	}  
-}
+		$separated_tag = explode(",", $value);
 
+		foreach($separated_tag as $singular_tag)
+		{   
+			$singular_tag = trim($singular_tag);
+			$tag_array = array('name'=>$singular_tag);
+			$new_tag = new Tag ($tag_array);       
+			$this->tags[] = $new_tag;   
+		}  
+	}
 
-/*
-validate_button
-két változót validál
-*/
-
-/*public function validate_button ($textarea, $tags)	
-{
-        //Ha a $textarára, és a $tags-ra teljesül a validate függvény, végrehajtja a kódot, tehát echózik egy új gombot a meghívás helyén.
-	if(validate($textarea) && validate($tags))	
+	/*új függvény, ami úgy használja a model::validate-et, mint a validate_button a validate-et*/
+	public function validate ()
 	{
-		echo '<input type="submit" name="Közzétesz" value="Közzétesz">';	
-	}	
+		if(!empty($this->tags) && is_array($this->tags))
+		{
+			return $this->validateAttribute($this->text);
+		}
+
+		return false;
+	}
 }
-*/
-
-
-/*új függvény, ami úgy használja a model::validate-et, mint a validate_button a validate-et*/
-
-
-public function validate ()
-{
-	return $this->validateAttribute($this->text);
-}
-
-
-
-}
-
-
-
 ?>

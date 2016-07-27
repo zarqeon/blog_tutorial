@@ -29,16 +29,11 @@ ide jönne a két calss
  *
  */
 
-include 'classPost.php';
+include 'Post.php';
+include 'Tag.php';
 
-include 'classTag.php';
-
-/*
-processTags függvény	
-*/
 
 //globális változók dektlarálása
-
 $textarea = $tags = $post_id = $id_post = false;
 
 //begyűjtjük a POST-ból és a REQUEST-ből a változókat
@@ -61,71 +56,48 @@ $textarea = $tags = $post_id = $id_post = false;
 	}
         
 //classPost példányosítás 
-                    	
-        
-$attributes = [
-'text' => $textarea,
-'tags' => $tags];
 
-$new_post = new classPost ($attributes);
+$post = new Post ([
+	'text' => $textarea,
+	'tags' => $tags
+]);
 
-//var_dump ($new_post);
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
-$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');	
-
-/*
-HA a $textarea nem üres, $repost = textarea
-*/
-
-$repost = "";
-
-if(!empty($textarea)) 
-{
-	$repost=$textarea;	
-//HA az $id_post nem üres, végrehajtja az edit_post statementet.
-}	else if(!empty($id_post)) {	
-        //A statement végrehajt egy lekérdezést, ami kiválasztja egy postot, aminek az id-je megegyezik az $id_post változóval
-	$edit_post=$connect->prepare("SELECT post_text FROM post WHERE id=?");
-	$data=array($id_post);
-	$edit_post->execute($data);
-	$result=$edit_post->fetchColumn();
-	$repost=$result;
-
-}
+//$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');	
 
 /*
 Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate függvény
 */
-if (isset($_POST['Közzétesz']) && (validate($textarea) && validate($tags))) 
-{	
+//if (isset($_POST['Közzétesz']) && ($post->validate())) 
+//{	
     
-	//ha van $id_post, frissíti az adatbázisban a blogpostot, amihez az adott id tartozik
-	if(!empty($id_post)){	
-		$stmnt = $connect->prepare("UPDATE post_text SET post =? WHERE id=?");
-		$stmnt->execute(array($textarea, $id_post));
-	}
-	//ha a feltétel nem teljesült
-	else{
-                //beszúrja a textarea tartalmát a post táblába
-		$statement = $connect->prepare("INSERT INTO post(post_text)VALUES(?)");
-		$statement->execute(array($textarea));
-		$post_id = $connect->lastInsertId();
-	}
+	////ha van $id_post, frissíti az adatbázisban a blogpostot, amihez az adott id tartozik
+	//if(!empty($id_post)){	
+		//$stmnt = $connect->prepare("UPDATE post_text SET post =? WHERE id=?");
+		//$stmnt->execute(array($textarea, $id_post));
+	//}
+	////ha a feltétel nem teljesült
+	//else{
+                ////beszúrja a textarea tartalmát a post táblába
+		//$statement = $connect->prepare("INSERT INTO post(post_text)VALUES(?)");
+		//$statement->execute(array($textarea));
+		//$post_id = $connect->lastInsertId();
+	//}
         
-        processTags($connect, $tags, $post_id);
-}	
+        //processTags($connect, $tags, $post_id);
+//}	
 
-/*
-hidden_input függvény 
-*/
-function hidden_input ($id_post)
-{
-    if (!empty ($id_post))
-    {
-	echo "<input type='hidden' name='id' value='$id_post'>";
-    }
-}
+//[>
+//hidden_input függvény 
+//*/
+//function hidden_input ($id_post)
+//{
+    //if (!empty ($id_post))
+    //{
+	//echo "<input type='hidden' name='id' value='$id_post'>";
+    //}
+//}
 
 ?>
 
@@ -136,7 +108,7 @@ function hidden_input ($id_post)
 <body>
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
-<?php echo $repost //kiechózza a $repost változó értékét, így marad meg a textarea tartalma ?>
+<?php if($post->validate()) { echo $post->text; } //kiechózza a $repost változó értékét, így marad meg a textarea tartalma ?>
 </textarea>
 <br />
 <input type="text" id="tags" name="tags" value = "<?php echo $tags ?>">
@@ -144,8 +116,7 @@ function hidden_input ($id_post)
 <input type="submit" name="Előnézet"value="Előnézet">
 <br />
 <?php
-classPost::validate($textarea, $tags); //itt hívódik meg a validate_button függvény
-hidden_input($id_post); //itt hívódik meg a hidden_input függvény
+//hidden_input($id_post); //itt hívódik meg a hidden_input függvény
 ?>
 
 </form>

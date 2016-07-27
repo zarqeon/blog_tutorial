@@ -2,7 +2,7 @@
 
 require_once 'Model.php';   
 
-class classTag extends Model {
+class Tag extends Model {
     //változók
 	/**
 	 * tag id
@@ -29,6 +29,9 @@ class classTag extends Model {
 	
     //függvények
     
+    /**
+     * ebből a függvényből majd konstruktort kell csinálni!
+     *
     public function processTags ($connect, $tags, $post_id){ 
         //szétválasztja vesszőnként a tag mezőbe beírt tagokat
 	$exploded_tags = explode(",", $tags);	
@@ -58,6 +61,7 @@ class classTag extends Model {
 	}
 
        
-}
+    }
+     */
 }
 ?>
