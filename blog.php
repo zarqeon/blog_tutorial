@@ -62,11 +62,25 @@ $post = new Post ([
 	'tags' => $tags
 ]);
 
-if(isset($_POST['Előnézet']) && ($_POST['textarea']) && ($_POST['tags']))
+
+if($post->validate($post)) 
+	{
+		var_dump ($post);
+	}
+
+
+
+
+
+
+/*if(isset($_POST['Előnézet']) && ($_POST['textarea']) && ($_POST['tags']))
 {
 echo ($_POST['textarea']), "<br />";
 echo ($_POST['tags']);
 }
+*/
+
+
 
 
 //Deklarálja a $connect változót. Ez egy PDO segítségével kapcsolatot hoz létre az adatbázissal.
