@@ -69,7 +69,7 @@ if($post->validate($post))
 	}
 
 
-
+/*var_dump ($post->tags);*/
 
 
 

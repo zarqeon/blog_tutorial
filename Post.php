@@ -61,15 +61,23 @@ class Post extends Model{
 
 	public function setTags ($value)
 	{   
+		if(!empty($value))
+		
+		{
 		$separated_tag = explode(",", $value);
 
 		foreach($separated_tag as $singular_tag)
 		{   
+			
+			if(!empty($singular_tag))
+			{
 			$singular_tag = trim($singular_tag);
 			$tag_array = array('name'=>$singular_tag);
 			$new_tag = new Tag ($tag_array);       
 			$this->tags[] = $new_tag;   
-		}  
+		}
+	}
+	}  
 	}
 
 	/*új függvény, ami úgy használja a model::validate-et, mint a validate_button a validate-et*/
