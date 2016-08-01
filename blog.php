@@ -63,7 +63,7 @@ $post = new Post ([
 ]);
 
 
-if($post->validate($post)) 
+if($post->validate()) 
 	{
 		var_dump ($post);
 		$save_button = "<input type='submit' name='Mentés' value='Mentés'>";
@@ -130,7 +130,7 @@ Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate f�
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
 <?php 
-echo ($_POST ['textarea']);
+echo $post->text;
 ?>
 </textarea>
 <br />
