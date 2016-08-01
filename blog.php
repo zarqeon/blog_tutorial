@@ -66,7 +66,6 @@ $post = new Post ([
 if($post->validate()) 
 	{
 		var_dump ($post);
-		$save_button = "<input type='submit' name='Mentés' value='Mentés'>";
 	}
 
 
@@ -143,7 +142,7 @@ echo $post->text;
 
 if($post->validate()) 
 {
-	echo $save_button;
+	echo "<input type='submit' name='Mentés' value='Mentés'>";
 }
 ?>
 
