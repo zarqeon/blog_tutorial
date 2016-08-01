@@ -66,6 +66,7 @@ $post = new Post ([
 if($post->validate($post)) 
 	{
 		var_dump ($post);
+		$save_button = "<input type='submit' name='Mentés' value='Mentés'>";
 	}
 
 
@@ -128,7 +129,9 @@ Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate f�
 <body>
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
-<?php if($post->validate()) { echo $post->text; } //kiechózza a $repost változó értékét, így marad meg a textarea tartalma ?>
+<?php 
+echo ($_POST ['textarea']);
+?>
 </textarea>
 <br />
 <input type="text" id="tags" name="tags" value = "<?php echo $tags ?>">
@@ -137,6 +140,11 @@ Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate f�
 <br />
 <?php
 //hidden_input($id_post); //itt hívódik meg a hidden_input függvény
+
+if($post->validate()) 
+{
+	echo $save_button;
+}
 ?>
 
 </form>
