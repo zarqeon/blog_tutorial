@@ -90,5 +90,14 @@ class Post extends Model{
 
 		return false;
 	}
+	
+	public function insertPost ()
+	{	
+		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+			
+		$statement = $connect->prepare("INSERT INTO post(post_text)VALUES(?)");
+		$statement->execute(array($this->text));		
+	}
+	
 }
 ?>

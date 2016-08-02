@@ -69,6 +69,7 @@ if($post->validate())
 	}
 
 
+
 /*var_dump ($post->tags);*/
 
 
@@ -79,7 +80,6 @@ echo ($_POST['textarea']), "<br />";
 echo ($_POST['tags']);
 }
 */
-
 
 
 
@@ -118,6 +118,12 @@ Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate f�
 	//echo "<input type='hidden' name='id' value='$id_post'>";
     //}
 //}
+
+if (isset($_POST['Mentés']))
+{
+	$post->insertPost($post);
+}
+
 
 ?>
 
