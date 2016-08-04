@@ -98,8 +98,6 @@ class Post extends Model{
 			
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($this->text));		
-		
-		print_r($statement->errorInfo());
 	}
 	
 }
