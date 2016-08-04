@@ -121,7 +121,7 @@ Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate f�
 
 if (isset($_POST['Mentés']))
 {
-	$post->insertPost($post);
+	$post->Create();
 }
 
 

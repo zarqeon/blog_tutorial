@@ -91,7 +91,7 @@ class Post extends Model{
 		return false;
 	}
 	
-	public function insertPost ()
+	public function Create ()
 	{	
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 			
