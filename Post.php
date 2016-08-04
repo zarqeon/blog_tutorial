@@ -97,8 +97,31 @@ class Post extends Model{
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 			
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
-		$statement->execute(array($this->text));		
+		$statement->execute(array($this->text));	
+		$post_id = $connect->lastInsertId();	
 	}
+	
+	public function Update ($post_id)
+	{
+		$statement = $connect->prepare("UPDATE post SET post =? WHERE id=?");
+		$statement->execute(array());
+	}	
+	
+
+	public function Save () 
+	{
+		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz'); /*ha belekerül a create függvény akkor itt érdemes talán létrehozni a kapcsolatot*/	
+		
+		if(!empty($post_id))
+		{
+			$this->Update();
+		}
+		else
+		{
+			$this->Create();
+		}	
+	}
+
 	
 }
 ?>
