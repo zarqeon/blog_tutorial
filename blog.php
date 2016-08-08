@@ -61,8 +61,7 @@ $connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz'); //nem
 
 $post = new Post ([
 	'text' => $textarea,
-	'tags' => $tags,
-	'id' => $connect->lastInsertId()	
+	'tags' => $tags
 ]);
 
 

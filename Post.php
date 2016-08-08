@@ -109,9 +109,9 @@ class Post extends Model{
 
 	public function Save () 
 	{		
-		var_dump ($this->id);
+		var_dump ($this->text);
 		
-		if(!empty($post_id))
+		if(!empty($this->id))
 		{
 			$this->Update();
 		}
