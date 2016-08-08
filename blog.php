@@ -57,15 +57,18 @@ $textarea = $tags = $post_id = $id_post = false;
         
 //classPost példányosítás 
 
+$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz'); //nemtudom jó ez e itt, szükség van rá a 65 sorhoz.
+
 $post = new Post ([
 	'text' => $textarea,
-	'tags' => $tags
+	'tags' => $tags,
+	'id' => $connect->lastInsertId()	
 ]);
 
 
 if($post->validate()) 
 	{
-		var_dump ($post);
+		/*var_dump ($post);*/
 	}
 
 
@@ -121,7 +124,7 @@ Ha le lett nyomva a közzétesz gomb ÉS validált két változót a validate f�
 
 if (isset($_POST['Mentés']))
 {
-	$post->Create();
+	$post->Save();
 }
 
 

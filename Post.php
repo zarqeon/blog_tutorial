@@ -98,10 +98,9 @@ class Post extends Model{
 			
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($this->text));	
-		$post_id = $connect->lastInsertId();	
 	}
 	
-	public function Update ($post_id)
+	public function Update ()
 	{
 		$statement = $connect->prepare("UPDATE post SET post =? WHERE id=?");
 		$statement->execute(array());
@@ -109,8 +108,8 @@ class Post extends Model{
 	
 
 	public function Save () 
-	{
-		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz'); /*ha belekerül a create függvény akkor itt érdemes talán létrehozni a kapcsolatot*/	
+	{		
+		var_dump ($this->id);
 		
 		if(!empty($post_id))
 		{
