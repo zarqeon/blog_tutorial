@@ -66,10 +66,10 @@ class Tag extends Model {
    
    public function Create ()
    {
-	    /*$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+	    $connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 			
 		$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
-		$statement->execute(array($this->name));	*/
+		$statement->execute(array($this->name));	
    }     
      
    public function Save () 

@@ -106,10 +106,21 @@ class Post extends Model{
 		$statement = $connect->prepare("UPDATE post SET post =? WHERE id=?");
 		$statement->execute(array());
 	}	
-	
+
+
+	public function Iterate ()
+	{
+			foreach ($tag_array as $tag_object)
+			{
+				$tag_object->Save();
+			}
+			
+	}
 
 	public function Save () 
 	{		
+		
+		$this->Iterate();	
 			
 		if(!empty($this->id))
 		{
