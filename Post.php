@@ -129,7 +129,6 @@ class Post extends Model{
 		else
 		{
 			$this->Create();
-			$this->setTags();//itt kellene meghívni a függvényt, de nem sikerül. Lehetséges hogy a $value változó "nem jut ide"
 		}	
 	}
 
