@@ -110,7 +110,7 @@ class Post extends Model{
 
 	public function Iterate ()
 	{
-			foreach ($tag_array as $tag_object)
+			foreach ($this->tags as $tag_object)
 			{
 				$tag_object->Save();
 			}
