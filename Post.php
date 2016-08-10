@@ -61,7 +61,8 @@ class Post extends Model{
 
 	public function setTags ($value)
 	{   
-		if(!empty($value))
+		
+		if(!empty($value)) 
 		
 		{
 		$separated_tag = explode(",", $value);
@@ -74,7 +75,7 @@ class Post extends Model{
 			$singular_tag = trim($singular_tag);
 			$tag_array = array('name'=>$singular_tag);
 			$new_tag = new Tag ($tag_array);       
-			$this->tags[] = $new_tag;   
+			$this->tags[] = $new_tag;   		
 		}
 	}
 	}  
@@ -109,8 +110,7 @@ class Post extends Model{
 
 	public function Save () 
 	{		
-		var_dump ($this->text);
-		
+			
 		if(!empty($this->id))
 		{
 			$this->Update();
@@ -118,6 +118,7 @@ class Post extends Model{
 		else
 		{
 			$this->Create();
+			$this->setTags();//itt kellene meghívni a függvényt, de nem sikerül. Lehetséges hogy a $value változó "nem jut ide"
 		}	
 	}
 
