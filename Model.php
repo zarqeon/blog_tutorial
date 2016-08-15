@@ -102,6 +102,10 @@ public function __construct($tag_array){
     //a $value lesz az attribútum értéke
     
     foreach ($tag_array as $key => $value){
+		
+		var_dump ($value);
+		
+	    $this->checkTags ($value);
     
         //meghatározza hogy mi a setter függvény neve.
 	//ha az attribútum neve (vagyis a $key) az volt, hogy 'text',
@@ -126,6 +130,8 @@ public function __construct($tag_array){
         }
         
     }
+    
+
     
 }
   
@@ -165,6 +171,13 @@ public function validateAttribute($variable)
 
 	return false;	
 }
+
+public function checkTags($value)
+	{
+	    $connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+		$statement = $connect->prepare("SELECT EXISTS(SELECT * FROM tag WHERE tag=?)");
+		$statement->execute(array($value));
+	}
 
 /*
 validate_button
