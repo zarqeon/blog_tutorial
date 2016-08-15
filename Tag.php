@@ -63,6 +63,13 @@ class Tag extends Model {
        
     }
      */
+     
+   public function __construct ()
+   {
+	   parent::__construct($this);
+	   $this->checkTags ();
+   }  
+   
    
    public function Create ()
    {
@@ -75,8 +82,16 @@ class Tag extends Model {
    public function Save () 
    {
        $this->Create();
-   }
-	   
+   } 
+	     
+
+	public function checkTags()
+	{
+		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+		$statement = $connect->prepare("SELECT EXISTS(SELECT * FROM tag WHERE tag=?)");
+		$statement->execute(array($this->name));
+	}  
+
 	     
 }
 ?>
