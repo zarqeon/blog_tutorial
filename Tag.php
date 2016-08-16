@@ -95,9 +95,7 @@ class Tag extends Model {
 		
 		$this->id = (array_values($result));
 		
-		var_dump ($result);
-		
-		die;
+		var_dump ($this->id);
 	}  
 
 	     
