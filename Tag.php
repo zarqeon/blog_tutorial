@@ -96,8 +96,7 @@ class Tag extends Model {
 		if (isset($result['ID']))
 		{
 			$this->id = ($result['ID']);
-		}
-		var_dump ($this->id);		
+		}	
 	}  
 
 	     

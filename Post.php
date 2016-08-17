@@ -88,6 +88,8 @@ class Post extends Model{
 		{
 			return $this->validateAttribute($this->text);
 		}
+		
+		var_dump ($this->tags);
 
 		return false;
 	}
@@ -111,16 +113,30 @@ class Post extends Model{
 	public function Iterate ()
 	{
 			foreach ($this->tags as $tag_object)
-			{
+			{			
 				$tag_object->Save();
 			}
 			
 	}
+	
+	public function PosttoTag ()
+	{
+		
+		foreach ($this->tags as $post_tags)
+		{	
+			$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+			$statement = $connect->prepare("INSERT INTO posttotag(tag_id, post_id)VALUES(?,?)");
+			$statement->execute(array($post_tags->id, $this->id));		
+		}
+		
+	
+	}
 
 	public function Save () 
 	{		
-		
 		$this->Iterate();	
+		
+		$this->PosttoTag();
 			
 		if(!empty($this->id))
 		{
