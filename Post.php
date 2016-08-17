@@ -101,6 +101,18 @@ class Post extends Model{
 			
 		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
 		$statement->execute(array($this->text));	
+		
+		$stmnt = $connect->prepare("SELECT id FROM post WHERE post=?");
+		$stmnt->execute(array($this->text));
+		
+		$result = $stmnt->fetch();
+		
+		if (isset($result['id']))
+		{
+			$this->id = ($result['id']);
+		}	
+		
+		var_dump ($this->id);
 	}
 	
 	public function Update ()
@@ -136,7 +148,7 @@ class Post extends Model{
 	{		
 		$this->Iterate();	
 		
-		$this->PosttoTag();
+
 			
 		if(!empty($this->id))
 		{
@@ -146,6 +158,8 @@ class Post extends Model{
 		{
 			$this->Create();
 		}	
+		
+		$this->PosttoTag();
 	}
 
 	
