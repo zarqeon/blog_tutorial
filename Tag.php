@@ -93,9 +93,11 @@ class Tag extends Model {
 		
 		$result = $statement->fetch();
 		
-		$this->id = (array_values($result));
-		
-		var_dump ($this->id);
+		if (isset($result['ID']))
+		{
+			$this->id = ($result['ID']);
+		}
+		var_dump ($this->id);		
 	}  
 
 	     
