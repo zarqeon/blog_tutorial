@@ -88,8 +88,6 @@ class Post extends Model{
 		{
 			return $this->validateAttribute($this->text);
 		}
-		
-		var_dump ($this->tags);
 
 		return false;
 	}

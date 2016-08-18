@@ -81,7 +81,10 @@ class Tag extends Model {
      
    public function Save () 
    {
-       $this->Create();
+	   if(empty($this->id))
+	   {
+		   $this->Create();
+       }	   
    } 
 	     
 
