@@ -25,7 +25,7 @@ foreach($result as $id ) {
     
     
     echo '<a href="blog.php?id='.$id['id'].'">', $id['id'], '</a>';
-    echo $id['post_text'];  
+    echo $id['post'];  
     echo '(', $number, ')';    
     
    
