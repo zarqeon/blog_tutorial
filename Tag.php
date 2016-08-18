@@ -77,6 +77,8 @@ class Tag extends Model {
 			
 		$statement = $connect->prepare("INSERT INTO tag(tag)VALUES(?)");
 		$statement->execute(array($this->name));	
+		
+		$this->id = $connect->LastInsertId();
    }     
      
    public function Save () 
