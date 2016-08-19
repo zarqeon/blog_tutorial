@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Model.php';   
-require_once 'Tag.php';
+//require_once 'Tag.php';
 
 /**
  * rövidtávú cél:
@@ -207,10 +207,12 @@ class Post extends Model{
 			$statement_tags->execute(array($tagid_value));
 			$re_tags = $statement_tags->fetch();
 			
-			$pure_tag=($re_tags['tag']);	
-			
-			var_dump ($pure_tag);
-		}
+			$tag_names=($re_tags['tag']);	
+		
+			$pure_tag[] = [$tagid_value => $tag_names]; //minden lefutáskor fölülíródik
+		}	
+	
+	var_dump ($pure_tag);	
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag]);
 		
