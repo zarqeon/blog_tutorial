@@ -9,5 +9,6 @@ error_reporting(E_ALL);
 require_once('Post.php');
 
 Post::PostList();//statikus hívás
+Post::getObject();
 
 ?>

@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Model.php';   
+require_once 'Tag.php';
 
 /**
  * rövidtávú cél:
@@ -152,7 +153,7 @@ class Post extends Model{
 	
 	public static function PostList ()
 	{	
-		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+		/*$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 		$query = $connect->query('SELECT * FROM post');
 		$result = $query->fetchAll();
 		
@@ -182,7 +183,37 @@ class Post extends Model{
 		}
 		
 		echo '<br />';   
+		}*/
+	}
+	
+	public static function getObject ()
+	{
+		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+		
+		$statement_text = $connect->prepare("SELECT post FROM post WHERE id=?");
+		$statement_text->execute(array("313"));
+		$re_text = $statement_text->fetch(); 
+		
+		$statement_tagids = $connect->prepare("SELECT tag_id FROM posttotag WHERE post_id=?");
+		$statement_tagids->execute(array("313"));
+		$re_tagid = $statement_tagids->fetchAll();
+		
+		
+		foreach ($re_tagid as $tagid)
+		{	
+			$tagid_value = ($tagid['tag_id']);
+			
+			$statement_tags = $connect->prepare("SELECT tag FROM tag WHERE id=?");
+			$statement_tags->execute(array($tagid_value));
+			$re_tags = $statement_tags->fetch();
+			
+			$pure_tag=($re_tags['tag']);	
+			
+			var_dump ($pure_tag);
 		}
+		
+	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag]);
+		
 	}
 
 	
