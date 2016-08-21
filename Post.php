@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Model.php';   
-//require_once 'Tag.php';
+require_once 'Tag.php';
 
 /**
  * rövidtávú cél:
@@ -63,8 +63,8 @@ class Post extends Model{
 	public function setTags ($value)
 	{   
 		
-		if(!empty($value)) 
-		
+		if(!empty($value) && is_string($value)) 
+
 		{
 		$separated_tag = explode(",", $value);
 
@@ -79,7 +79,22 @@ class Post extends Model{
 			$this->tags[] = $new_tag;   		
 		}
 	}
-	}  
+	}
+	
+		if(is_array($value))
+		{
+			foreach ($value as $individual_tag)
+			{
+				if(is_array($individual_tag));
+				{
+					$new_tag = new Tag ($individual_tag);
+					$new_tag->id = key($individual_tag);
+					$new_tag->name = current($individual_tag);
+					
+					var_dump ($new_tag);
+				}
+			}
+		}
 	}
 
 	/*új függvény, ami úgy használja a model::validate-et, mint a validate_button a validate-et*/
@@ -210,12 +225,9 @@ class Post extends Model{
 			$tag_names=($re_tags['tag']);	
 		
 			$pure_tag[] = [$tagid_value => $tag_names]; //minden lefutáskor fölülíródik
-		}	
-	
-	var_dump ($pure_tag);	
+		}		
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag]);
-		
 	}
 
 	
