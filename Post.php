@@ -58,7 +58,7 @@ class Post extends Model{
 	 *
 	 * @var string
 	 */
-	private $tableName;   
+	private $tableName = "post";   
 
 	public function setTags ($value)
 	{   
@@ -91,7 +91,7 @@ class Post extends Model{
 				}
 			}
 			
-			$this->tag = $new_tag;
+			$this->tags = $new_tag;
 		}
 	}
 
@@ -199,16 +199,16 @@ class Post extends Model{
 		}*/
 	}
 	
-	public static function getObject ()
+	public static function getObject ($source_id = "313")
 	{
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 		
 		$statement_text = $connect->prepare("SELECT post FROM post WHERE id=?");
-		$statement_text->execute(array("313"));
+		$statement_text->execute(array("$source_id"));
 		$re_text = $statement_text->fetch(); 
 		
 		$statement_tagids = $connect->prepare("SELECT tag_id FROM posttotag WHERE post_id=?");
-		$statement_tagids->execute(array("313"));
+		$statement_tagids->execute(array("$source_id"));
 		$re_tagid = $statement_tagids->fetchAll();
 		
 		
@@ -225,7 +225,7 @@ class Post extends Model{
 			$pure_tag[] = ['id' => $tagid_value, 'name' => $tag_names]; //minden lefutáskor fölülíródik
 		}		
 		
-	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag]);
+	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag, 'id'=> $source_id]);
 	
 	var_dump ($rc_post);
 	}

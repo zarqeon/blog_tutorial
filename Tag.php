@@ -25,7 +25,7 @@ class Tag extends Model {
 	 *
 	 * @var string
 	 */
-	private $tableName;
+	private $tableName = "tag";
 	
     //függvények
     
