@@ -111,7 +111,7 @@ class Post extends Model{
 		
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 			
-		$statement = $connect->prepare("INSERT INTO post(post)VALUES(?)");
+		$statement = $connect->prepare("INSERT INTO" . $this->tableName . "(post)VALUES(?)");
 		$statement->execute(array($this->text));	
 		
 		$this->id = $connect->LastInsertId();
@@ -119,7 +119,7 @@ class Post extends Model{
 	
 	public function Update ()
 	{
-		$statement = $connect->prepare("UPDATE post SET post =? WHERE id=?");
+		$statement = $connect->prepare("UPDATE" . $this->tableName . "SET post =? WHERE id=?");
 		$statement->execute(array());
 	}	
 
