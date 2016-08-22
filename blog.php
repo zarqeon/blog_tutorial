@@ -29,9 +29,7 @@ ide jönne a két calss
  *
  */
 
-include 'Post.php';
-include 'Tag.php';
-
+require_once 'Post.php';
 
 //globális változók dektlarálása
 $textarea = $tags = $post_id = $id_post = false;
