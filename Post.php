@@ -88,8 +88,6 @@ class Post extends Model{
 				if(is_array($individual_tag));
 				{
 					$new_tag = new Tag ($individual_tag);
-					$new_tag->id = key($individual_tag);
-					$new_tag->name = current($individual_tag);
 					
 					var_dump ($new_tag);
 				}
@@ -224,7 +222,7 @@ class Post extends Model{
 			
 			$tag_names=($re_tags['tag']);	
 		
-			$pure_tag[] = [$tagid_value => $tag_names]; //minden lefutáskor fölülíródik
+			$pure_tag[] = ['id' => $tagid_value, 'name' => $tag_names]; //minden lefutáskor fölülíródik
 		}		
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag]);
