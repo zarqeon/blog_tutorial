@@ -87,11 +87,11 @@ class Post extends Model{
 			{
 				if(is_array($individual_tag));
 				{
-					$new_tag = new Tag ($individual_tag);
-					
-					var_dump ($new_tag);
+					$new_tag[] = new Tag ($individual_tag);
 				}
 			}
+			
+			$this->tag = $new_tag;
 		}
 	}
 
@@ -226,6 +226,8 @@ class Post extends Model{
 		}		
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag]);
+	
+	var_dump ($rc_post);
 	}
 
 	
