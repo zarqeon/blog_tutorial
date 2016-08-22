@@ -75,7 +75,7 @@ class Tag extends Model {
    {
 	    $connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 			
-		$statement = $connect->prepare("INSERT INTO" . $this->tableName . "(tag)VALUES(?)");
+		$statement = $connect->prepare("INSERT INTO " . $this->tableName . "(tag)VALUES(?)");
 		$statement->execute(array($this->name));	
 		
 		$this->id = $connect->LastInsertId();
@@ -93,7 +93,7 @@ class Tag extends Model {
 	public function checkTags()
 	{
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
-		$statement = $connect->prepare("SELECT ID FROM" . $this->tableName . "WHERE tag=?");
+		$statement = $connect->prepare("SELECT ID FROM " . $this->tableName . " WHERE tag=?");
 		$statement->execute(array($this->name));
 		
 		$result = $statement->fetch();
