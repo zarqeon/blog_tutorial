@@ -95,6 +95,8 @@
 
 
 class Model {   
+	
+const TABLE_NAME = '';	
 
 const DB_PREFIX = '';
     

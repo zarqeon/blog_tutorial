@@ -206,6 +206,9 @@ class Post extends Model{
 		
 		$statement_text = $connect->prepare("SELECT post FROM " . self::tableName() . " WHERE id=?");
 		$statement_text->execute(array("$source_id"));
+		
+		var_dump($statement_text);
+		
 		$re_text = $statement_text->fetch(); 
 		
 		$statement_tagids = $connect->prepare("SELECT tag_id FROM posttotag WHERE post_id=?");
