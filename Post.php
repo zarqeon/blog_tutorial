@@ -58,7 +58,8 @@ class Post extends Model{
 	 *
 	 * @var string
 	 */
-	private $tableName = "post";   
+	const TABLE_NAME = 'post';   
+
 
 	public function setTags ($value)
 	{   

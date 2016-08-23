@@ -93,7 +93,10 @@
  */
 
 
-class Model {    
+
+class Model {   
+
+const DB_PREFIX = '';
     
 public function __construct($tag_array){
         
@@ -126,8 +129,6 @@ public function __construct($tag_array){
         }
         
     }
-    
-
     
 }
   
@@ -168,6 +169,10 @@ public function validateAttribute($variable)
 	return false;	
 }
 
+public static function tableName ()
+{
+	return self::DB_PREFIX . self::TABLE_NAME;
+}
 
 /*
 validate_button
