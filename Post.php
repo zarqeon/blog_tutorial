@@ -112,7 +112,7 @@ class Post extends Model{
 		
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 			
-		$statement = $connect->prepare("INSERT INTO " . $this->tableName . "(post)VALUES(?)");
+		$statement = $connect->prepare("INSERT INTO " . self::tableName() . "(post)VALUES(?)");
 		$statement->execute(array($this->text));	
 		
 		$this->id = $connect->LastInsertId();
@@ -120,7 +120,7 @@ class Post extends Model{
 	
 	public function Update ()
 	{
-		$statement = $connect->prepare("UPDATE " . $this->tableName . "SET post =? WHERE id=?");
+		$statement = $connect->prepare("UPDATE " . self::tableName() . "SET post =? WHERE id=?");
 		$statement->execute(array());
 	}	
 
@@ -204,7 +204,7 @@ class Post extends Model{
 	{
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 		
-		$statement_text = $connect->prepare("SELECT post FROM post WHERE id=?");
+		$statement_text = $connect->prepare("SELECT post FROM " . self::tableName() . " WHERE id=?");
 		$statement_text->execute(array("$source_id"));
 		$re_text = $statement_text->fetch(); 
 		
@@ -217,7 +217,7 @@ class Post extends Model{
 		{	
 			$tagid_value = ($tagid['tag_id']);
 			
-			$statement_tags = $connect->prepare("SELECT tag FROM tag WHERE id=?");
+			$statement_tags = $connect->prepare("SELECT tag FROM " . self::tableName() . " WHERE id=?");
 			$statement_tags->execute(array($tagid_value));
 			$re_tags = $statement_tags->fetch();
 			
