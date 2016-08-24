@@ -207,7 +207,7 @@ class Post extends Model{
 		$statement_text = $connect->prepare("SELECT post FROM " . self::tableName() . " WHERE id=?");
 		$statement_text->execute(array("$source_id"));
 		
-		var_dump($statement_text);
+		//var_dump($statement_text);
 		
 		$re_text = $statement_text->fetch(); 
 		
@@ -220,8 +220,9 @@ class Post extends Model{
 		{	
 			$tagid_value = ($tagid['tag_id']);
 			
-			$statement_tags = $connect->prepare("SELECT tag FROM " . self::tableName() . " WHERE id=?");
+			$statement_tags = $connect->prepare("SELECT tag FROM " . Tag::tableName() . " WHERE id=?");
 			$statement_tags->execute(array($tagid_value));
+			
 			$re_tags = $statement_tags->fetch();
 			
 			$tag_names=($re_tags['tag']);	
