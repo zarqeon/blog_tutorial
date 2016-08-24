@@ -173,7 +173,9 @@ public function validateAttribute($variable)
 
 public static function tableName ()
 {
-	return self::DB_PREFIX . self::TABLE_NAME;
+	$c_class = get_called_class();
+	
+	return $c_class::DB_PREFIX . $c_class::TABLE_NAME;
 }
 
 /*
