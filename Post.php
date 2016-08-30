@@ -200,7 +200,7 @@ class Post extends Model{
 		}*/
 	}
 	
-	public static function getObject ($source_id = "313")
+	public static function getObject ($source_id = "317")
 	{
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 		
@@ -231,10 +231,30 @@ class Post extends Model{
 		}		
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag, 'id'=> $source_id]);
-	
-	var_dump ($rc_post);
 	}
 
+	public static function getAllPosts ()
+	{
+		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
+		
+		$statement_allpost = $connect->prepare("SELECT * FROM post");
+		$statement_allpost->execute();
+		
+		$all_posts = $statement_allpost->fetchAll();
+		
+		foreach ($all_posts as $separated_posts)
+		{	
+			$s_post_id[] = ($separated_posts['id']); 
+			
+			var_dump ($s_post_id);
+			
+			$source_id = $s_post_id;
+			
+			self::getObject($source_id);
+			
+			die;
+		}	
+	}
 	
 }
 ?>

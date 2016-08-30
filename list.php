@@ -10,5 +10,5 @@ require_once('Post.php');
 
 Post::PostList();//statikus hívás
 Post::getObject();
-
+Post::getAllPosts();
 ?>
