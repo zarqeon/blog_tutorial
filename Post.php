@@ -200,7 +200,7 @@ class Post extends Model{
 		}*/
 	}
 	
-	public static function getObject ($source_id = "317")
+	public static function getObject ($source_id)
 	{
 		$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz');
 		
@@ -244,16 +244,11 @@ class Post extends Model{
 		
 		foreach ($all_posts as $separated_posts)
 		{	
-			$s_post_id[] = ($separated_posts['id']); 
-			
-			var_dump ($s_post_id);
-			
-			$source_id = $s_post_id;
+			$source_id[] = ($separated_posts['id']); 
 			
 			self::getObject($source_id);
-			
-			die;
 		}	
+
 	}
 	
 }
