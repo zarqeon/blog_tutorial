@@ -231,6 +231,8 @@ class Post extends Model{
 		}		
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag, 'id'=> $source_id]);
+	
+	var_dump ($rc_post);
 	}
 
 	public static function getAllPosts ()
@@ -243,10 +245,8 @@ class Post extends Model{
 		$all_posts = $statement_allpost->fetchAll();
 		
 		foreach ($all_posts as $separated_posts)
-		{	
-			$source_id[] = ($separated_posts['id']); 
-			
-			self::getObject($source_id);
+		{			
+			self::getObject($separated_posts['id']);
 		}	
 
 	}
