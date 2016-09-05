@@ -232,7 +232,7 @@ class Post extends Model{
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag, 'id'=> $source_id]);
 	
-	var_dump ($rc_post);
+	//var_dump ($rc_post);
 	}
 
 	public static function getAllPosts ()
