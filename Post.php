@@ -231,8 +231,11 @@ class Post extends Model{
 		}		
 		
 	$rc_post = new Post (['text' => $re_text, 'tags' => $pure_tag, 'id'=> $source_id]);
-	
+
 	//var_dump ($rc_post);
+
+	return $rc_post; //ha ennek nem adok return value-t akkor a getallposts nem kapja meg amit kell.
+	
 	}
 
 	public static function getAllPosts ()
@@ -246,9 +249,10 @@ class Post extends Model{
 		
 		foreach ($all_posts as $separated_posts)
 		{			
-			self::getObject($separated_posts['id']);
+			$objects_array[] = self::getObject($separated_posts['id']);
 		}	
-
+	
+		return $objects_array;
 	}
 	
 }

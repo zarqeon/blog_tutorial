@@ -9,5 +9,8 @@ error_reporting(E_ALL);
 require_once('Post.php');
 
 Post::PostList();
-Post::getAllPosts();
+$returned_objects_array = Post::getAllPosts();
+
+var_dump ($returned_objects_array); //jelenleg array-ban tér vissza
+
 ?>
