@@ -11,6 +11,14 @@ require_once('Post.php');
 Post::PostList();
 $returned_objects_array = Post::getAllPosts();
 
-var_dump ($returned_objects_array); //jelenleg array-ban tér vissza
-
+foreach ($returned_objects_array as $separated_objects)
+	{
+		$list_id = $separated_objects->id;
+		
+		echo '<a href="blog.php?id='.$list_id.'">', $list_id, '</a>';
+		
+		$p_text = $separated_objects->text['post'];
+		
+		echo "$p_text, <br />";
+	}
 ?>
