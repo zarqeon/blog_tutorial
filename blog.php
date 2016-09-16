@@ -63,6 +63,11 @@ $post = new Post ([
 ]);
 
 
+$echo_object = Post::getObject(($_GET['id']));
+
+var_dump ($echo_object);
+
+
 if($post->validate()) 
 	{
 		/*var_dump ($post);*/
