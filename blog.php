@@ -62,10 +62,14 @@ $post = new Post ([
 	'tags' => $tags
 ]);
 
-
-$echo_object = Post::getObject(($_GET['id']));
-
-var_dump ($echo_object);
+if(!empty($_GET['id']))
+{
+	$echo_object = Post::getObject(($_GET['id']));
+	
+	$textarea = $echo_object->text;
+	
+	var_dump ($textarea);
+}
 
 
 if($post->validate()) 
@@ -140,7 +144,7 @@ if (isset($_POST['Mentés']))
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
 <?php 
-echo $post->text;
+echo $textarea;
 ?>
 </textarea>
 <br />
