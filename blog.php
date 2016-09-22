@@ -47,6 +47,7 @@ $textarea = $tags = $post_id = $id_post = false;
 		$tags = $_POST['tags'];
 	}
 
+	//ez eleve fölösleges, hogy ha utána nem használod az $id_post-ot
 	// blogpost id-je, ami alapján behozta a blogpostot a list.php
 	if(isset($_REQUEST['id']))
 	{
@@ -57,6 +58,7 @@ $textarea = $tags = $post_id = $id_post = false;
 
 $connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz'); //nemtudom jó ez e itt, szükség van rá a 65 sorhoz.
 
+//ez noticokat fog dobálni, ha a POST_ban nincs textarea és tags.
 $post = new Post ([
 	'text' => $textarea,
 	'tags' => $tags
@@ -150,6 +152,7 @@ if (isset($_POST['Mentés']))
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
 <?php 
 
+//ehelyett egyszerűbb lenne eleve a $post->textarea-at kiechozni
 if(!empty($_GET['id']))
 {
 	echo $echo_text;
