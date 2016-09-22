@@ -64,11 +64,16 @@ $post = new Post ([
 
 if(!empty($_GET['id']))
 {
-	$echo_object = Post::getObject(($_GET['id']));
+	$post = Post::getObject(($_GET['id']));
+
+	$echo_text = ($post->text['post']);
 	
-	$textarea = $echo_object->text;
+	foreach ($post->tags as $t_objects)
+	{
+		$echo_tags = ($t_objects->name);
+	}
 	
-	var_dump ($textarea);
+	var_dump ($echo_tags);
 }
 
 
@@ -144,11 +149,33 @@ if (isset($_POST['Mentés']))
 <form action="blog.php" method="post">
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
 <?php 
+
+if(!empty($_GET['id']))
+{
+	echo $echo_text;
+}
+else
+{
 echo $textarea;
+}
+
 ?>
 </textarea>
 <br />
-<input type="text" id="tags" name="tags" value = "<?php echo $tags ?>">
+<input type="text" id="tags" name="tags" value = "
+<?php 
+
+if(!empty($_GET['id']))
+	{
+		echo $echo_tags;
+	}
+else
+	{
+		echo $tags; 
+	}
+
+?>
+">
 <br />
 <input type="submit" name="Előnézet"value="Előnézet">
 <br />
