@@ -47,37 +47,30 @@ $textarea = $tags = $post_id = $id_post = false;
 		$tags = $_POST['tags'];
 	}
 
-	//ez eleve fölösleges, hogy ha utána nem használod az $id_post-ot
+	// ha van bármi a POST-ban akkor abból csinálunk egy objektumot
+	if(!empty($textarea) || !empty($tags))
+	{
+		$post = new Post ([
+			'text' => $textarea,
+			'tags' => $tags
+		]);
+	} else 
+		
 	// blogpost id-je, ami alapján behozta a blogpostot a list.php
 	if(isset($_REQUEST['id']))
 	{
-		$id_post = $_REQUEST['id'];
+		$post = Post::getObject(($_GET['id']));
+	}
+
+	//létrehozunk egy üres objektumot, hogy ne legyen notice az echozásnál
+	if(!isset($post))
+	{
+		$post = new Post();
 	}
         
 //classPost példányosítás 
 
-$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz'); //nemtudom jó ez e itt, szükség van rá a 65 sorhoz.
-
-//ez noticokat fog dobálni, ha a POST_ban nincs textarea és tags.
-$post = new Post ([
-	'text' => $textarea,
-	'tags' => $tags
-]);
-
-if(!empty($_GET['id']))
-{
-	$post = Post::getObject(($_GET['id']));
-
-	$echo_text = ($post->text['post']);
-	
-	foreach ($post->tags as $t_objects)
-	{
-		$echo_tags = ($t_objects->name);
-	}
-	
-	var_dump ($echo_tags);
-}
-
+//$connect = new PDO ('mysql:host=localhost;dbname=blog','root','4fhc9imz'); //nemtudom jó ez e itt, szükség van rá a 65 sorhoz.
 
 if($post->validate()) 
 	{
@@ -152,30 +145,14 @@ if (isset($_POST['Mentés']))
 <textarea id="textarea" name="textarea" rows="10" placeholder="Ide írj" cols="50">
 <?php 
 
-//ehelyett egyszerűbb lenne eleve a $post->textarea-at kiechozni
-if(!empty($_GET['id']))
-{
-	echo $echo_text;
-}
-else
-{
-echo $textarea;
-}
+echo $post->textarea;
 
 ?>
 </textarea>
 <br />
 <input type="text" id="tags" name="tags" value = "
 <?php 
-
-if(!empty($_GET['id']))
-	{
-		echo $echo_tags;
-	}
-else
-	{
-		echo $tags; 
-	}
+echo $post->tags;
 
 ?>
 ">
